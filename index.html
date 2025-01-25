@@ -59,6 +59,65 @@
             width: auto;
             height: 50px;
             margin: 10px;
+            opacity: 0;
+            animation: fadeIn 1s forwards, smoothBlink 3s infinite;
+        }
+        .header-images img:nth-child(1) {
+            animation-delay: 0s, 8s;
+        }
+        .header-images img:nth-child(2) {
+            animation-delay: 1s, 8s;
+        }
+        .header-images img:nth-child(3) {
+            animation-delay: 2s, 8s;
+        }
+        .header-images img:nth-child(4) {
+            animation-delay: 3s, 8s;
+        }
+        .header-images img:nth-child(5) {
+            animation-delay: 4s, 8s;
+        }
+        .header-images img:nth-child(6) {
+            animation-delay: 5s, 8s;
+        }
+        .header-images img:nth-child(7) {
+            animation-delay: 6s, 8s;
+        }
+        .header-images img:nth-child(8) {
+            animation-delay: 7s, 8s;
+        }
+        .header-images img:nth-child(9) {
+            animation-delay: 8s, 8s;
+            height: 60px; /* 20% larger than the other logos */
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes smoothBlink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+        .titilando {
+            font-size: 18px;
+            color: #ed7318;
+            opacity: 0;
+            animation: appear 1s forwards, blinkSoft 2s infinite;
+        }
+        @keyframes appear {
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes blinkSoft {
+            50% {
+                opacity: 0.5;
+            }
         }
         .botones {
             display: flex;
@@ -110,7 +169,7 @@
             <div class="header-images">
                 <div class="row">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
-                    <img src="https://static.wikia.nocookie.net/logopedia/images/0/07/Vix%2B.png/revision/latest/scale-to-width-down/284?cb=20230119232122" alt="Vix+">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/f/f0/ViX_Logo.png" alt="ViX">
                     <img src="https://theflujotv.com/wp-content/uploads/2024/11/cropped-logo1.png" alt="FlujoTV">
                     <img src="https://images.sftcdn.net/images/t_app-icon-m/p/12bc97c1-cda4-4bb0-ac94-1f32b5c6ad6b/1340628262/tele-latino-peliculasseries-logo" alt="Tele Latino">
                 </div>
@@ -120,7 +179,11 @@
                     <img src="https://remoters.net/wp-content/uploads/2016/03/cyberghost-3.png" alt="CyberGhost VPN">
                     <img src="https://cdn.worldvectorlogo.com/logos/hola-vpn-logo.svg" alt="Hola VPN">
                 </div>
+                <div class="row">
+                    <img src="https://1000marcas.net/wp-content/uploads/2025/01/CapCut-Logo.png" alt="CapCut">
+                </div>
             </div>
+            <p class="titilando">¿Cuál necesitas? Si no está, ¡lo conseguimos para ti!</p>
             <p>📲 VENDE Y GANA te ofrece otras cuentas como Paramount, Vix+, Tele Latino, Flujo TV, servicios de VPN, y muchas más que podrás descubrir en esta sección.</p>
             <div class="botones">
                 <button class="boton boton-ver" onclick="window.location.href='https://departamentodecuentas.company.site/products/otras-cuentas'">Ver Plataformas Disponibles</button>
