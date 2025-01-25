@@ -30,9 +30,12 @@
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            max-width: 90%;
+            width: 90%;
+            max-width: 600px;
             text-align: center;
             position: relative;
+            overflow-y: auto;
+            max-height: 90vh; /* Ensure it fits within the viewport */
         }
         .venta p {
             margin: 15px 0;
@@ -59,35 +62,10 @@
             width: auto;
             height: 50px;
             margin: 10px;
-            opacity: 0;
+            max-width: 100%;
             animation: fadeIn 1s forwards, smoothBlink 3s infinite;
         }
-        .header-images img:nth-child(1) {
-            animation-delay: 0s, 8s;
-        }
-        .header-images img:nth-child(2) {
-            animation-delay: 1s, 8s;
-        }
-        .header-images img:nth-child(3) {
-            animation-delay: 2s, 8s;
-        }
-        .header-images img:nth-child(4) {
-            animation-delay: 3s, 8s;
-        }
-        .header-images img:nth-child(5) {
-            animation-delay: 4s, 8s;
-        }
-        .header-images img:nth-child(6) {
-            animation-delay: 5s, 8s;
-        }
-        .header-images img:nth-child(7) {
-            animation-delay: 6s, 8s;
-        }
-        .header-images img:nth-child(8) {
-            animation-delay: 7s, 8s;
-        }
         .header-images img:nth-child(9) {
-            animation-delay: 8s, 8s;
             height: 60px; /* 20% larger than the other logos */
         }
         @keyframes fadeIn {
