@@ -137,7 +137,7 @@
             <div class="header-images">
                 <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+"></div>
                 <div class="button"><img src="https://upload.wikimedia.org/wikipedia/en/f/f0/ViX_Logo.png" alt="ViX"></div>
-                <div class="button"><img src="https://theflujotv.com/wp-content/uploads/2024/11/cropped-logo1.png" alt="FlujoTV"></div>
+                <div class="button" id="flujotv-button"><img src="https://theflujotv.com/wp-content/uploads/2024/11/cropped-logo1.png" alt="FlujoTV"></div>
                 <div class="button"><img src="https://images.sftcdn.net/images/t_app-icon-m/p/12bc97c1-cda4-4bb0-ac94-1f32b5c6ad6b/1340628262/tele-latino-peliculasseries-logo" alt="Tele Latino"></div>
                 <div class="button"><img src="https://1000marcas.net/wp-content/uploads/2022/02/Apple-TV-logo.png" alt="Apple TV"></div>
                 <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deezer_logo%2C_2023.svg/1280px-Deezer_logo%2C_2023.svg.png" alt="Deezer"></div>
@@ -158,6 +158,11 @@
         function openModal() {
             document.getElementById('overlay').style.display = 'flex';
         }
+
+        // Agregar evento de clic al botón de FlujoTV
+        document.getElementById('flujotv-button').addEventListener('click', function() {
+            window.location.href = 'https://vendeygana2.github.io/compraflujotv/';
+        });
     </script>
 </body>
 </html>
