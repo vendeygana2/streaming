@@ -64,42 +64,26 @@
             flex-wrap: wrap;
             margin-bottom: 10px;
         }
+        .header-images .button {
+            width: 80px; /* Adjusted size for mobile */
+            height: 80px; /* Adjusted size for mobile */
+            margin: 5px; /* Adjusted margin for mobile */
+            border: 2px solid #ed7318; /* Orange border */
+            border-radius: 10px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .header-images .button:hover {
+            background-color: #f5f5f5;
+        }
         .header-images img {
-            width: auto;
-            height: 50px;
-            margin: 10px;
-            max-width: 100%;
-            opacity: 0;
-            animation: fadeIn 1s forwards, smoothBlink 3s infinite;
-        }
-        .header-images img:nth-child(1), .header-images img:nth-child(2) {
-            animation-delay: 0s, 8s;
-        }
-        .header-images img:nth-child(3), .header-images img:nth-child(4) {
-            animation-delay: 1s, 8s;
-        }
-        .header-images img:nth-child(5), .header-images img:nth-child(6) {
-            animation-delay: 2s, 8s;
-        }
-        .header-images img:nth-child(7), .header-images img:nth-child(8) {
-            animation-delay: 3s, 8s;
-        }
-        .header-images img:nth-child(9) {
-            animation-delay: 4s, 8s;
-            height: 60px; /* 20% larger than the other logos */
-        }
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-        @keyframes smoothBlink {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
+            max-width: 60px; /* Adjusted size for mobile */
+            max-height: 60px; /* Adjusted size for mobile */
+            transition: all 0.3s;
         }
         .botones {
             display: flex;
@@ -141,6 +125,17 @@
             font-weight: bold;
             z-index: 2;
         }
+        @media (min-width: 600px) {
+            .header-images .button {
+                width: 120px; /* Revert size for larger screens */
+                height: 120px; /* Revert size for larger screens */
+                margin: 10px; /* Revert margin for larger screens */
+            }
+            .header-images img {
+                max-width: 80px; /* Revert size for larger screens */
+                max-height: 80px; /* Revert size for larger screens */
+            }
+        }
     </style>
 </head>
 <body onload="openModal()">
@@ -150,19 +145,22 @@
             <div class="header-title">🎥 OTRAS CUENTAS STREAMING 🎥</div>
             <div class="header-images">
                 <div class="row">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/f/f0/ViX_Logo.png" alt="ViX">
-                    <img src="https://theflujotv.com/wp-content/uploads/2024/11/cropped-logo1.png" alt="FlujoTV">
-                    <img src="https://images.sftcdn.net/images/t_app-icon-m/p/12bc97c1-cda4-4bb0-ac94-1f32b5c6ad6b/1340628262/tele-latino-peliculasseries-logo" alt="Tele Latino">
+                    <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+"></div>
+                    <div class="button"><img src="https://upload.wikimedia.org/wikipedia/en/f/f0/ViX_Logo.png" alt="ViX"></div>
+                    <div class="button"><img src="https://theflujotv.com/wp-content/uploads/2024/11/cropped-logo1.png" alt="FlujoTV"></div>
+                    <div class="button"><img src="https://images.sftcdn.net/images/t_app-icon-m/p/12bc97c1-cda4-4bb0-ac94-1f32b5c6ad6b/1340628262/tele-latino-peliculasseries-logo" alt="Tele Latino"></div>
                 </div>
                 <div class="row">
-                    <img src="https://1000marcas.net/wp-content/uploads/2022/02/Apple-TV-logo.png" alt="Apple TV">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deezer_logo%2C_2023.svg/1280px-Deezer_logo%2C_2023.svg.png" alt="Deezer">
-                    <img src="https://remoters.net/wp-content/uploads/2016/03/cyberghost-3.png" alt="CyberGhost VPN">
-                    <img src="https://cdn.worldvectorlogo.com/logos/hola-vpn-logo.svg" alt="Hola VPN">
+                    <div class="button"><img src="https://1000marcas.net/wp-content/uploads/2022/02/Apple-TV-logo.png" alt="Apple TV"></div>
+                    <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deezer_logo%2C_2023.svg/1280px-Deezer_logo%2C_2023.svg.png" alt="Deezer"></div>
+                    <div class="button"><img src="https://remoters.net/wp-content/uploads/2016/03/cyberghost-3.png" alt="CyberGhost VPN"></div>
+                    <div class="button"><img src="https://cdn.worldvectorlogo.com/logos/hola-vpn-logo.svg" alt="Hola VPN"></div>
                 </div>
                 <div class="row">
-                    <img src="https://1000marcas.net/wp-content/uploads/2025/01/CapCut-Logo.png" alt="CapCut">
+                    <div class="button"><img src="https://1000marcas.net/wp-content/uploads/2025/01/CapCut-Logo.png" alt="CapCut" style="height: 90px;"></div>
+                    <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Rakuten Viki"></div>
+                    <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Apple_Music_logo.svg/1024px-Apple_Music_logo.svg.png" alt="Apple Music"></div>
+                    <div class="button"><img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Office_365_logo_%282013-2019%29.png" alt="Office 365"></div>
                 </div>
             </div>
             <p>📲 VENDE Y GANA te ofrece otras cuentas como Paramount, Vix+, Tele Latino, Flujo TV, servicios de VPN, y muchas más que podrás descubrir en esta sección.</p>
