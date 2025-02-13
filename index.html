@@ -12,7 +12,7 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        .overlay, .overlay2 {
+        .overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -24,10 +24,7 @@
             align-items: center;
             z-index: 1000;
         }
-        .overlay2 {
-            z-index: 1001; /* Asegura que esté por encima de la primera ventana */
-        }
-        .venta, .venta2 {
+        .venta {
             background-color: white;
             border: 2px solid #ed7318;
             border-radius: 15px;
@@ -39,9 +36,6 @@
             position: relative;
             overflow-y: auto;
             max-height: 90vh;
-        }
-        .venta2 {
-            border: 4px solid #ed7318; /* Marco naranja más grueso */
         }
         .header-title {
             font-size: 24px;
@@ -144,9 +138,7 @@
             <div class="header-images">
                 <!-- Botones con redirecciones -->
                 <div class="button" id="paramount-button"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+"></div>
-                <div class="button" id="vix-button"><img src="https://upload.wikimedia.org/wikipedia/en/f/f0/ViX_Logo.png" alt="ViX"></div>
-                <div class="button" id="flujotv-button"><img src="https://theflujotv.com/wp-content/uploads/2024/11/cropped-logo1.png" alt="FlujoTV"></div>
-                <div class="button" id="telelatino-button"><img src="https://images.sftcdn.net/images/t_app-icon-m/p/12bc97c1-cda4-4bb0-ac94-1f32b5c6ad6b/1340628262/tele-latino-peliculasseries-logo" alt="Tele Latino"></div>
+                <div class="button" id="vix-button"><img src="https://static.wikia.nocookie.net/logopedia/images/0/07/Vix%2B.png/revision/latest/scale-to-width-down/284?cb=20230119232122" alt="ViX"></div>
                 <div class="button" id="appletv-button"><img src="https://1000marcas.net/wp-content/uploads/2022/02/Apple-TV-logo.png" alt="Apple TV"></div>
                 <div class="button" id="deezer-button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deezer_logo%2C_2023.svg/1280px-Deezer_logo%2C_2023.svg.png" alt="Deezer"></div>
                 <div class="button" id="cyberghost-button"><img src="https://remoters.net/wp-content/uploads/2016/03/cyberghost-3.png" alt="CyberGhost VPN"></div>
@@ -162,29 +154,9 @@
         </div>
     </div>
 
-    <!-- Segunda ventana emergente -->
-    <div class="overlay2" id="overlay2">
-        <div class="venta2">
-            <button class="close-button" onclick="closeSecondModal()">X</button>
-            <div class="header-title">CRECEMOS CONTIGO!</div>
-            <p style="font-size: 18px; color: #333;">
-                En <strong>VENDE Y GANA</strong> queremos apoyarte. Ahora, si realizas una transferencia de <strong>700 BS</strong> por Pago Móvil a Mercantil para la compra de cuentas, podrás reclamar con el comprobante de pago o referencia <strong>TOTALMENTE GRATIS</strong> una pantalla de una de estas plataformas: <strong>Amazon Prime, Max, Panaxtreaming, Flujo TV, Paramount, Crunchyroll, Disney o YouTube Premium</strong>.
-            </p>
-            <!-- Botón "MÁS INFORMACIÓN" -->
-            <div class="botones">
-                <button class="boton" onclick="window.location.href='https://departamentodecuentas.company.site/products/recarga-premium'">MÁS INFORMACIÓN</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         function openModal() {
             document.getElementById('overlay').style.display = 'flex';
-            document.getElementById('overlay2').style.display = 'flex'; // Mostrar la segunda ventana
-        }
-
-        function closeSecondModal() {
-            document.getElementById('overlay2').style.display = 'none'; // Ocultar la segunda ventana
         }
 
         // Redirecciones para los botones
@@ -193,9 +165,6 @@
         });
         document.getElementById('vix-button').addEventListener('click', function() {
             window.location.href = 'https://vendeygana2.github.io/compravix-/';
-        });
-        document.getElementById('telelatino-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/compratelelatino/';
         });
         document.getElementById('appletv-button').addEventListener('click', function() {
             window.location.href = 'https://vendeygana2.github.io/compraappletv/';
@@ -220,9 +189,6 @@
         });
         document.getElementById('office-button').addEventListener('click', function() {
             window.location.href = 'https://vendeygana2.github.io/OFFICE/';
-        });
-        document.getElementById('flujotv-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/compraflujotv/';
         });
     </script>
 </body>
