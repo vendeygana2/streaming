@@ -3,193 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otras Cuentas Streaming</title>
-    <link rel="icon" href="https://d.techtimes.com/en/full/428195/maxhuge-discount-now-live-save-40-max-annual-subscriptions-now.png?w=1600&h=1600&q=88&f=556c64e5a75d17a2c4b90d6f76f83e5e" type="image/png">
+    <title>Formulario Vende y Gana</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        body, html {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            width: 100%;
+            height: 100%;
         }
-        .overlay {
-            position: fixed;
+        iframe {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .venta {
-            background-color: white;
-            border: 2px solid #ed7318;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-            position: relative;
-            overflow-y: auto;
-            max-height: 90vh;
-        }
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ed7318;
-            margin-bottom: 20px;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            50% {
-                opacity: 0;
-            }
-        }
-        .header-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .header-images .button {
-            width: 100%;
-            height: 100px;
-            border: 2px solid #ed7318;
-            border-radius: 10px;
-            background-color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .header-images .button:hover {
-            background-color: #f5f5f5;
-        }
-        .header-images img {
-            max-width: 69px;
-            max-height: 69px;
-            transition: all 0.3s;
-        }
-        .botones {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .boton {
-            background-color: #ed7318;
-            color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-        .boton-ver {
-            background-color: #000000;
-        }
-        .boton:hover {
-            background-color: #d66616;
-        }
-        .boton-ver:hover {
-            background-color: #333333;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: red;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
-            text-align: center;
-            line-height: 25px;
-            font-weight: bold;
-            z-index: 2;
-        }
-        @media (min-width: 600px) {
-            .header-images {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .header-images .button {
-                height: 120px;
-            }
-            .header-images img {
-                max-width: 92px;
-                max-height: 92px;
-            }
         }
     </style>
 </head>
-<body onload="openModal()">
-    <!-- Primera ventana emergente -->
-    <div class="overlay" id="overlay">
-        <div class="venta">
-            <button class="close-button" onclick="window.location.href='https://www.vendeygana.net/user/'">X</button>
-            <div class="header-title">🎥 OTRAS CUENTAS STREAMING 🎥</div>
-            <div class="header-images">
-                <!-- Botones con redirecciones -->
-                <div class="button" id="paramount-button"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+"></div>
-                <div class="button" id="vix-button"><img src="https://static.wikia.nocookie.net/logopedia/images/0/07/Vix%2B.png/revision/latest/scale-to-width-down/284?cb=20230119232122" alt="ViX"></div>
-                <div class="button" id="appletv-button"><img src="https://1000marcas.net/wp-content/uploads/2022/02/Apple-TV-logo.png" alt="Apple TV"></div>
-                <div class="button" id="deezer-button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deezer_logo%2C_2023.svg/1280px-Deezer_logo%2C_2023.svg.png" alt="Deezer"></div>
-                <div class="button" id="cyberghost-button"><img src="https://remoters.net/wp-content/uploads/2016/03/cyberghost-3.png" alt="CyberGhost VPN"></div>
-                <div class="button" id="holavpn-button"><img src="https://cdn.worldvectorlogo.com/logos/hola-vpn-logo.svg" alt="Hola VPN"></div>
-                <div class="button" id="capcut-button"><img src="https://1000marcas.net/wp-content/uploads/2025/01/CapCut-Logo.png" alt="CapCut" style="height: 103.5px;"></div>
-                <div class="button" id="rakuten-button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Rakuten Viki"></div>
-                <div class="button" id="applemusic-button"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Apple_Music_logo.svg/1024px-Apple_Music_logo.svg.png" alt="Apple Music"></div>
-                <div class="button" id="office-button"><img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Office_365_logo_%282013-2019%29.png" alt="Office 365"></div>
-            </div>
-            <div class="botones">
-                <button class="boton boton-ver" onclick="window.location.href='https://departamentodecuentas.company.site/products/otras-cuentas'">Ver Plataformas Disponibles</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openModal() {
-            document.getElementById('overlay').style.display = 'flex';
-        }
-
-        // Redirecciones para los botones
-        document.getElementById('paramount-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/comprapramount/';
-        });
-        document.getElementById('vix-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/compravix-/';
-        });
-        document.getElementById('appletv-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/compraappletv/';
-        });
-        document.getElementById('deezer-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/compradezeer/';
-        });
-        document.getElementById('capcut-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/compracatcup/';
-        });
-        document.getElementById('cyberghost-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/cyberghostvpn/';
-        });
-        document.getElementById('holavpn-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/holavpn/';
-        });
-        document.getElementById('rakuten-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/rakutenbiki/';
-        });
-        document.getElementById('applemusic-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/APPLEMUSIC/';
-        });
-        document.getElementById('office-button').addEventListener('click', function() {
-            window.location.href = 'https://vendeygana2.github.io/OFFICE/';
-        });
-    </script>
+<body>
+    <iframe src="https://form.jotform.com/250575335732054"></iframe>
 </body>
 </html>
