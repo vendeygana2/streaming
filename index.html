@@ -3,25 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Vende y Gana</title>
+    <title>Formulario en Pantalla Completa</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
         }
+
         iframe {
+            width: 100%;
+            height: 100%; /* Ocupa toda la pantalla */
+            border: none;
+        }
+
+        .close-button {
             position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            background-color: darkred;
+        }
+
+        .notice {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            z-index: 10; /* Siempre visible por encima del iframe */
+        }
+
+        .minimize-button {
+            position: fixed;
+            top: 10px;
+            right: 100px;
+            background-color: #007BFF;
+            color: white;
             border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            display: none; /* Oculto por defecto */
+        }
+
+        .minimize-button:hover {
+            background-color: #0056b3;
+        }
+
+        .notice p {
+            font-size: 18px;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        .notice button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            animation: blink 1.5s infinite; /* Botones parpadean */
+        }
+
+        .youtube-button {
+            background-color: #FF0000;
+            color: white;
+        }
+
+        .youtube-button:hover {
+            background-color: #cc0000;
+        }
+
+        .app-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .app-button:hover {
+            background-color: #388E3C;
+        }
+
+        /* Animaciones */
+        @keyframes blink {
+            50% { opacity: 0.5; }
         }
     </style>
+    <script>
+        function hideNotice() {
+            document.querySelector('.notice').style.display = 'none';
+        }
+
+        function minimizeNotice() {
+            const notice = document.querySelector('.notice');
+            const minimizeButton = document.querySelector('.minimize-button');
+            notice.style.transform = 'translateY(-100%)'; /* Oculta la ventana hacia arriba */
+            minimizeButton.style.display = 'block'; /* Muestra el botón de restaurar */
+        }
+
+        function restoreNotice() {
+            const notice = document.querySelector('.notice');
+            const minimizeButton = document.querySelector('.minimize-button');
+            notice.style.transform = 'translateY(0)'; /* Restaura la ventana */
+            minimizeButton.style.display = 'none'; /* Oculta el botón de restaurar */
+        }
+    </script>
 </head>
 <body>
-    <iframe src="https://form.jotform.com/250575335732054"></iframe>
+    <button class="close-button" onclick="window.location.href='https://www.vendeygana.net/user/'">X</button>
+    <div class="notice">
+        <p>AHORA PUEDES YA DESCARGAR NUESTRA APP Y HACER TODO MÁS FÁCIL PARA TI</p>
+        <button class="youtube-button" onclick="window.location.href='https://www.youtube.com/watch?v=YaZccFewDjY'">VIDEO DE DESCARGA APP</button>
+        <button class="app-button" onclick="window.location.href='https://app.jotform.com/250464329670661/checkout'">DESCARGA APLICACIÓN</button>
+        <button class="close-button" onclick="minimizeNotice()">MINIMIZAR</button>
+    </div>
+    <button class="minimize-button" onclick="restoreNotice()">RESTAURAR</button>
+    <iframe src="https://form.jotform.com/250575335732054" title="Formulario"></iframe>
 </body>
 </html>
+
