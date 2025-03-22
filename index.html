@@ -3,62 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Pantalla Completa</title>
+    <title>Pantalla de Juegos</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Elimina barras de desplazamiento */
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            background-color: #f3f4f6; /* Color de fondo si el iframe no ocupa todo */
-        }
-
-        .container {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-            background-color: #ffffff;
+            justify-content: center;
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             border: none;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: red;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000; /* Asegura que el botón siempre esté encima */
-        }
-
-        .close-btn:hover {
-            background: darkred;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <button class="close-btn" onclick="window.location.href='https://www.vendeygana.net/user/'">X</button>
-        <iframe src="https://fluidforms.co/embed/form?id=67a660e6b5dbcdf5a509bf82" title="Formulario"></iframe>
-    </div>
+    <!-- Formulario embebido actualizado -->
+    <iframe src="https://96vxnn73.forms.app/formulario-sin-titulo" title="Formulario"></iframe>
 </body>
 </html>
 
