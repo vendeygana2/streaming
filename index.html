@@ -23,11 +23,102 @@
             height: 100vh;
             border: none;
         }
+        
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 25px;
+            border: 4px solid #ED7318;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 550px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .modal-title {
+            color: #ED7318;
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+        
+        .gif-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .gif-container img {
+            width: 312px;  /* 480px - 35% = 312px */
+            height: 176px; /* 270px - 35% = 176px */
+            border-radius: 8px;
+        }
+        
+        .highlight {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <!-- Formulario embebido actualizado -->
     <iframe src="https://96vxnn73.forms.app/formulario-sin-titulo" title="Formulario"></iframe>
+    
+    <!-- Ventana emergente -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-title">IMPORTANTE AMIG@ USUARI@</div>
+            <p>SI BUSCAS UNA <span class="highlight">PLATAFORMA STREAMING</span> O <span class="highlight">RECARGA DE JUEGO</span> Y NO LO VES EN LA LISTA escribe a nuestros operadores y pregunta! LO CONSEGUIMOS PARA TI!</p>
+            <div class="gif-container">
+                <img src="https://i.pinimg.com/originals/df/53/ce/df53cea12a13cb480ff3b2bbe404e79d.gif" alt="Animación">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar el modal cuando se carga la página
+        window.onload = function() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            
+            // Cerrar el modal cuando se hace clic en la X
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            // Cerrar el modal cuando se hace clic fuera del contenido
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
-
