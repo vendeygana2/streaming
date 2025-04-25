@@ -1,122 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalla de Juegos</title>
+    <title>Botones de Streaming con Sombra</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
+        body {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://ecdisis.com/wp-content/uploads/2021/01/plataformas-de-streaming-900x506-1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
         }
 
-        iframe {
-            width: 100vw;
-            height: 100vh;
-            border: none;
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
         }
-        
-        /* Estilos para el modal */
+
+        .contenedor-botones {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 900px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .boton-imagen {
+            background: white;
+            border: none;
+            padding: 15px;
+            margin: 15px;
+            cursor: pointer;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 180px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0; /* Oculta cualquier texto que pudiera haber */
+        }
+
+        .boton-imagen:hover {
+            transform: translateY(-5px);
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .boton-imagen img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Estilo especial para el botón negro */
+        .boton-negro {
+            background-color: #000000;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .boton-negro:hover {
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Estilos para la ventana emergente */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
         }
-        
+
         .modal-content {
-            background-color: white;
-            margin: 15% auto;
-            padding: 25px;
-            border: 4px solid #ED7318;
+            position: relative;
+            width: 90%;
+            height: 90%;
+            margin: 2% auto;
+            background: white;
             border-radius: 10px;
-            width: 80%;
-            max-width: 550px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            text-align: center;
+            overflow: hidden;
         }
-        
-        .modal-title {
-            color: #ED7318;
-            font-weight: bold;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
             font-weight: bold;
             cursor: pointer;
+            z-index: 1001;
+            text-shadow: 0 0 5px black;
         }
-        
-        .close:hover {
-            color: black;
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
-        
-        .gif-container {
-            margin-top: 20px;
-            text-align: center;
+
+        /* Estilo específico para el botón de Apple TV */
+        .boton-apple-tv {
+            background-color: black;
+            background-image: url('https://i0.wp.com/pub-f354ec240bea480db7320bd0e29d972e.r2.dev/sites/4/Untitled-21-c6199aa35e300684ffb7.png?fit=1200%2C675&ssl=1');
+            background-size: contain; /* Ajusta la imagen dentro del botón manteniendo su proporción */
+            background-repeat: no-repeat;
+            background-position: center;
         }
-        
-        .gif-container img {
-            width: 312px;  /* 480px - 35% = 312px */
-            height: 176px; /* 270px - 35% = 176px */
-            border-radius: 8px;
+
+        /* Media query para pantallas de hasta 600px de ancho (típicamente teléfonos) */
+        @media (max-width: 600px) {
+            .contenedor-botones {
+                justify-content: space-around; /* Distribuye los botones con espacio alrededor */
+            }
+
+            .boton-imagen {
+                width: calc(50% - 20px); /* Ocupa la mitad del ancho menos el margen */
+                margin: 10px; /* Reduce el margen entre botones */
+            }
         }
-        
-        .highlight {
-            font-weight: bold;
+
+        /* Media query para pantallas un poco más grandes (tabletas pequeñas) */
+        @media (min-width: 601px) and (max-width: 900px) {
+            .contenedor-botones {
+                justify-content: space-around; /* Distribuye los botones con espacio alrededor */
+            }
+
+            .boton-imagen {
+                width: calc(33.33% - 20px); /* Ocupa un tercio del ancho menos el margen */
+                margin: 10px; /* Reduce el margen entre botones */
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Formulario embebido actualizado -->
-    <iframe src="https://96vxnn73.forms.app/formulario-sin-titulo" title="Formulario"></iframe>
-    
-    <!-- Ventana emergente -->
-    <div id="myModal" class="modal">
+    <div class="contenedor-botones">
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/compranet')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/amazonprime')">
+            <img src="https://cdn.worldvectorlogo.com/logos/amazon-prime-video-1.svg" alt="Amazon Prime Video">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/disneyplus')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/maxpremium')">
+            <img src="https://logodownload.org/wp-content/uploads/2024/03/max-logo.png" alt="Max">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/crunchyroll')">
+            <img src="https://cdn.worldvectorlogo.com/logos/crunchyroll-1.svg" alt="Crunchyroll">
+        </button>
+
+        <button class="boton-imagen" onclick="abrirVix('https://online.forms.app/respuestasdereportesdefa/vix')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/ViX_Logo.svg/2560px-ViX_Logo.svg.png" alt="ViX">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Viki">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/telelatino')">
+            <img src="https://doctor-pandora.odoo.com/web/image/product.template/8/image_1920?unique=889500d" alt="Doctor Pandora">
+        </button>
+
+        <button class="boton-imagen boton-apple-tv" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/aplletv')">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/paramountplus')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
+        </button>
+
+        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/plexpremium')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Plex_logo_2022.svg/2560px-Plex_logo_2022.svg.png" alt="Plex">
+        </button>
+
+        <button class="boton-imagen boton-negro" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/panaxtreaming')">
+            <img src="https://dhgf5mcbrms62.cloudfront.net/110979006/header-fcHJMd/IVsTzWZ-600x600.webp" alt="Nuevo Servicio">
+        </button>
+    </div>
+
+    <div id="vixModal" class="modal">
+        <span class="close-btn" onclick="cerrarVix()">&times;</span>
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-title">IMPORTANTE AMIG@ USUARI@</div>
-            <p>SI BUSCAS UNA <span class="highlight">PLATAFORMA STREAMING</span> O <span class="highlight">RECARGA DE JUEGO</span> Y NO LO VES EN LA LISTA escribe a nuestros operadores y pregunta! LO CONSEGUIMOS PARA TI!</p>
-            <div class="gif-container">
-                <img src="https://i.pinimg.com/originals/df/53/ce/df53cea12a13cb480ff3b2bbe404e79d.gif" alt="Animación">
-            </div>
+            <iframe id="vixFrame" src="" frameborder="0"></iframe>
         </div>
     </div>
 
     <script>
-        // Mostrar el modal cuando se carga la página
-        window.onload = function() {
-            var modal = document.getElementById("myModal");
+        function redirigir(url) {
+            window.location.href = url;
+        }
+
+        function abrirVix(url) {
+            const modal = document.getElementById('vixModal');
+            const iframe = document.getElementById('vixFrame');
+            iframe.src = url;
             modal.style.display = "block";
-            
-            // Cerrar el modal cuando se hace clic en la X
-            var span = document.getElementsByClassName("close")[0];
-            span.onclick = function() {
-                modal.style.display = "none";
-            }
-            
-            // Cerrar el modal cuando se hace clic fuera del contenido
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
+            document.body.style.overflow = "hidden";
+        }
+
+        function cerrarVix() {
+            const modal = document.getElementById('vixModal');
+            const iframe = document.getElementById('vixFrame');
+            modal.style.display = "none";
+            iframe.src = "";
+            document.body.style.overflow = "auto";
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('vixModal');
+            if (event.target == modal) {
+                cerrarVix();
             }
         }
     </script>
