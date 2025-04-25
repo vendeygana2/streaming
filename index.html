@@ -39,6 +39,20 @@
             background-color: rgba(255, 255, 255, 0.85);
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-main {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10;
         }
 
         .boton-imagen {
@@ -55,7 +69,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0; /* Oculta cualquier texto que pudiera haber */
+            font-size: 0;
         }
 
         .boton-imagen:hover {
@@ -69,7 +83,6 @@
             object-fit: contain;
         }
 
-        /* Estilo especial para el botón negro */
         .boton-negro {
             background-color: #000000;
             box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
@@ -79,7 +92,6 @@
             box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
         }
 
-        /* Estilos para la ventana emergente */
         .modal {
             display: none;
             position: fixed;
@@ -119,123 +131,117 @@
             border: none;
         }
 
-        /* Estilo específico para el botón de Apple TV */
         .boton-apple-tv {
             background-color: black;
             background-image: url('https://i0.wp.com/pub-f354ec240bea480db7320bd0e29d972e.r2.dev/sites/4/Untitled-21-c6199aa35e300684ffb7.png?fit=1200%2C675&ssl=1');
-            background-size: contain; /* Ajusta la imagen dentro del botón manteniendo su proporción */
+            background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
         }
 
-        /* Media query para pantallas de hasta 600px de ancho (típicamente teléfonos) */
         @media (max-width: 600px) {
             .contenedor-botones {
-                justify-content: space-around; /* Distribuye los botones con espacio alrededor */
+                justify-content: space-around;
             }
 
             .boton-imagen {
-                width: calc(50% - 20px); /* Ocupa la mitad del ancho menos el margen */
-                margin: 10px; /* Reduce el margen entre botones */
+                width: calc(50% - 20px);
+                margin: 10px;
             }
         }
 
-        /* Media query para pantallas un poco más grandes (tabletas pequeñas) */
         @media (min-width: 601px) and (max-width: 900px) {
             .contenedor-botones {
-                justify-content: space-around; /* Distribuye los botones con espacio alrededor */
+                justify-content: space-around;
             }
 
             .boton-imagen {
-                width: calc(33.33% - 20px); /* Ocupa un tercio del ancho menos el margen */
-                margin: 10px; /* Reduce el margen entre botones */
+                width: calc(33.33% - 20px);
+                margin: 10px;
             }
         }
     </style>
 </head>
 <body>
     <div class="contenedor-botones">
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/compranet')">
+        <button class="close-main" onclick="window.location.href='https://www.vendeygana.net/user/'">&times;</button>
+        
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/compranet')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/amazonprime')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/amazonprime')">
             <img src="https://cdn.worldvectorlogo.com/logos/amazon-prime-video-1.svg" alt="Amazon Prime Video">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/disneyplus')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/disneyplus')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/maxpremium')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/maxpremium')">
             <img src="https://logodownload.org/wp-content/uploads/2024/03/max-logo.png" alt="Max">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/crunchyroll')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/crunchyroll')">
             <img src="https://cdn.worldvectorlogo.com/logos/crunchyroll-1.svg" alt="Crunchyroll">
         </button>
 
-        <button class="boton-imagen" onclick="abrirVix('https://online.forms.app/respuestasdereportesdefa/vix')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vix')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/ViX_Logo.svg/2560px-ViX_Logo.svg.png" alt="ViX">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Viki">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/telelatino')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/telelatino')">
             <img src="https://doctor-pandora.odoo.com/web/image/product.template/8/image_1920?unique=889500d" alt="Doctor Pandora">
         </button>
 
-        <button class="boton-imagen boton-apple-tv" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/aplletv')">
+        <button class="boton-imagen boton-apple-tv" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/aplletv')">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/paramountplus')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/paramountplus')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
         </button>
 
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/plexpremium')">
+        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/plexpremium')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Plex_logo_2022.svg/2560px-Plex_logo_2022.svg.png" alt="Plex">
         </button>
 
-        <button class="boton-imagen boton-negro" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/panaxtreaming')">
+        <button class="boton-imagen boton-negro" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/panaxtreaming')">
             <img src="https://dhgf5mcbrms62.cloudfront.net/110979006/header-fcHJMd/IVsTzWZ-600x600.webp" alt="Nuevo Servicio">
         </button>
     </div>
 
-    <div id="vixModal" class="modal">
-        <span class="close-btn" onclick="cerrarVix()">&times;</span>
+    <div id="generalModal" class="modal">
+        <span class="close-btn" onclick="cerrarModal()">&times;</span>
         <div class="modal-content">
-            <iframe id="vixFrame" src="" frameborder="0"></iframe>
+            <iframe id="modalFrame" src="" frameborder="0"></iframe>
         </div>
     </div>
 
     <script>
-        function redirigir(url) {
-            window.location.href = url;
-        }
-
-        function abrirVix(url) {
-            const modal = document.getElementById('vixModal');
-            const iframe = document.getElementById('vixFrame');
+        function abrirModal(url) {
+            const modal = document.getElementById('generalModal');
+            const iframe = document.getElementById('modalFrame');
             iframe.src = url;
             modal.style.display = "block";
             document.body.style.overflow = "hidden";
         }
 
-        function cerrarVix() {
-            const modal = document.getElementById('vixModal');
-            const iframe = document.getElementById('vixFrame');
+        function cerrarModal() {
+            const modal = document.getElementById('generalModal');
+            const iframe = document.getElementById('modalFrame');
             modal.style.display = "none";
             iframe.src = "";
             document.body.style.overflow = "auto";
         }
 
-        // Cerrar modal al hacer clic fuera del contenido
         window.onclick = function(event) {
-            const modal = document.getElementById('vixModal');
+            const modal = document.getElementById('generalModal');
             if (event.target == modal) {
-                cerrarVix();
+                cerrarModal();
             }
         }
     </script>
