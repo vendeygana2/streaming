@@ -40,7 +40,6 @@
             background-color: rgba(255, 255, 255, 0.85);
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px; /* Espacio para el popup */
         }
 
         .boton-imagen {
@@ -130,65 +129,6 @@
             background-position: center;
         }
 
-        /* Estilos para el popup */
-        #popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #2596be; /* ¡Nuevo color de fondo! */
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 1001;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-        }
-
-        .popup-header {
-            background-color: black; /* Franja negra */
-            color: white; /* Opcional: color del texto si hubiera */
-            padding: 10px; /* Espacio alrededor de los logos */
-            border-radius: 5px; /* Opcional: bordes redondeados para la franja */
-            margin-bottom: 15px; /* Espacio entre la franja y el texto principal */
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .popup-header img {
-            max-height: 40px;
-        }
-
-        #popup h3, #popup p, #popup h2, #popup button {
-            margin-bottom: 10px;
-        }
-
-        #popup button {
-            background-color: black; /* Fondo negro */
-            color: white; /* Letras blancas */
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #popup button:hover {
-            background-color: #333; /* Un negro ligeramente más oscuro al pasar el mouse */
-        }
-
-        #popup .close-popup {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
         /* Media query para pantallas de hasta 600px de ancho (típicamente teléfonos) */
         @media (max-width: 600px) {
             .contenedor-botones {
@@ -197,16 +137,6 @@
             .boton-imagen {
                 width: calc(50% - 20px); /* Ocupa la mitad del ancho menos el margen */
                 margin: 10px; /* Reduce el margen entre botones */
-            }
-            #popup {
-                width: 80%;
-            }
-            .popup-header {
-                padding: 8px;
-                margin-bottom: 10px;
-            }
-            .popup-header img {
-                max-height: 30px;
             }
         }
 
@@ -219,20 +149,10 @@
                 width: calc(33.33% - 20px); /* Ocupa un tercio del ancho menos el margen */
                 margin: 10px; /* Reduce el margen entre botones */
             }
-            #popup {
-                width: 60%;
-            }
-            .popup-header {
-                padding: 9px;
-                margin-bottom: 12px;
-            }
-            .popup-header img {
-                max-height: 35px;
-            }
         }
     </style>
 </head>
-<body onload="mostrarPopup()">
+<body>
     <div class="contenedor-botones">
         <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/compranet')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
@@ -271,21 +191,6 @@
         </button>
     </div>
 
-    <div id="popup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #2596be; color: white; padding: 20px; border-radius: 10px; z-index: 1001; text-align: center; box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);">
-        <div class="popup-header">
-            <img src="https://logodownload.org/wp-content/uploads/2020/11/disney-plus-logo-1.png" alt="Disney+">
-            <img src="https://lh3.googleusercontent.com/FuaTf0UrgvY1VJ3cv3ZEmBP7Wokzm_upcCnglOIqO0G3rq3duTH8eveyWrbbUpotnduF6PPr0XBBvA" alt="Google Profile" style="border-radius: 50%;">
-            <img src="https://www.renatoyacolca.com/wp-content/uploads/2022/06/canva-pro.png" alt="Canva Pro">
-        </div>
-        <span class="close-popup" onclick="cerrarPopup()">×</span>
-        <h3>¡No te pierdas el MEGA COMBO de fin de semana!</h3>
-        <p>Una pantalla Disney Plus+ ESPN</p>
-        <p>Con una pantalla ViX+ Premium</p>
-        <p>Y además una cuenta Canva Pro personalizada</p>
-        <h2>¡Por solo 145 Bs!</h2>
-        <button onclick="window.location.href = 'https://online.forms.app/respuestasdereportesdefa/supercombo';" style="background-color: black; color: white;">¡Lo quiero!</button>
-    </div>
-
     <div id="generalModal" class="modal">
         <span class="close-btn" onclick="cerrarModal()">×</span>
         <div class="modal-content">
@@ -321,14 +226,6 @@
             if (event.target == modal) {
                 cerrarModal();
             }
-        }
-
-        function mostrarPopup() {
-            document.getElementById('popup').style.display = 'block';
-        }
-
-        function cerrarPopup() {
-            document.getElementById('popup').style.display = 'none';
         }
     </script>
     <script type="text/javascript" src="https://smartarget.online/loader.js?u=3a9cb769fbc5bbbff96e2f604c565e13679272a0"></script>
