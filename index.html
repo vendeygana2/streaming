@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botones de Streaming con Sombra</title>
+    <title>Botones de Streaming</title>
     <style>
         body {
             display: flex;
-            flex-direction: column; /* Para colocar la cabecera encima del contenedor de botones */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -31,15 +31,44 @@
             z-index: -1;
         }
 
+        .contenedor-principal {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            max-width: 900px;
+            width: 95%;
+        }
+
+        .cerrar-principal-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            z-index: 10;
+            background: none;
+            border: none;
+            padding: 0;
+            line-height: 1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .cerrar-principal-btn:hover {
+            color: #000;
+        }
+
         .contenedor-botones {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            max-width: 900px;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
         }
 
         .boton-imagen {
@@ -56,7 +85,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0; /* Oculta cualquier texto que pudiera haber */
+            font-size: 0;
         }
 
         .boton-imagen:hover {
@@ -70,7 +99,6 @@
             object-fit: contain;
         }
 
-        /* Estilo especial para el botón negro */
         .boton-negro {
             background-color: #000000;
             box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
@@ -80,7 +108,6 @@
             box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
         }
 
-        /* Estilos para la ventana emergente (modal) */
         .modal {
             display: none;
             position: fixed;
@@ -95,11 +122,19 @@
         .modal-content {
             position: relative;
             width: 90%;
-            height: 90%;
+            height: 90%; /* Adjusted height to fill the modal */
             margin: 2% auto;
             background: white;
             border-radius: 10px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-iframe-container {
+            flex-grow: 1;
+            overflow: auto;
+            width: 100%;
         }
 
         .close-btn {
@@ -120,87 +155,89 @@
             border: none;
         }
 
-        /* Estilo específico para el botón de Apple TV */
         .boton-apple-tv {
             background-color: black;
             background-image: url('https://i0.wp.com/pub-f354ec240bea480db7320bd0e29d972e.r2.dev/sites/4/Untitled-21-c6199aa35e300684ffb7.png?fit=1200%2C675&ssl=1');
-            background-size: contain; /* Ajusta la imagen dentro del botón manteniendo su proporción */
+            background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
         }
 
-        /* Media query para pantallas de hasta 600px de ancho (típicamente teléfonos) */
         @media (max-width: 600px) {
             .contenedor-botones {
                 width: 95%;
             }
             .boton-imagen {
-                width: calc(50% - 20px); /* Ocupa la mitad del ancho menos el margen */
-                margin: 10px; /* Reduce el margen entre botones */
+                width: calc(50% - 20px);
+                margin: 10px;
             }
         }
 
-        /* Media query para pantallas un poco más grandes (tabletas pequeñas) */
         @media (min-width: 601px) and (max-width: 900px) {
             .contenedor-botones {
                 width: 90%;
             }
             .boton-imagen {
-                width: calc(33.33% - 20px); /* Ocupa un tercio del ancho menos el margen */
-                margin: 10px; /* Reduce el margen entre botones */
+                width: calc(33.33% - 20px);
+                margin: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="contenedor-botones">
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/compranet')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/amazonprime')">
-            <img src="https://cdn.worldvectorlogo.com/logos/amazon-prime-video-1.svg" alt="Amazon Prime Video">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/disneyplus')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/maxpremium')">
-            <img src="https://logodownload.org/wp-content/uploads/2024/03/max-logo.png" alt="Max">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/crunchyroll')">
-            <img src="https://cdn.worldvectorlogo.com/logos/crunchyroll-1.svg" alt="Crunchyroll">
-        </button>
-        <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vix')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/ViX_Logo.svg/2560px-ViX_Logo.svg.png" alt="ViX">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Viki">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/telelatino')">
-            <img src="https://doctor-pandora.odoo.com/web/image/product.template/8/image_1920?unique=889500d" alt="Doctor Pandora">
-        </button>
-        <button class="boton-imagen boton-apple-tv" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/aplletv')">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/paramountplus')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
-        </button>
-        <button class="boton-imagen" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/plexpremium')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Plex_logo_2022.svg/2560px-Plex_logo_2022.svg.png" alt="Plex">
-        </button>
-        <button class="boton-imagen boton-negro" onclick="redirigir('https://online.forms.app/respuestasdereportesdefa/panaxtreaming')">
-            <img src="https://dhgf5mcbrms62.cloudfront.net/110979006/header-fcHJMd/IVsTzWZ-600x600.webp" alt="Nuevo Servicio">
-        </button>
+    <div class="contenedor-principal">
+        <button class="cerrar-principal-btn" onclick="redirigirPrincipal()">×</button>
+        <div class="contenedor-botones">
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/compranet')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/amazonprime')">
+                <img src="https://cdn.worldvectorlogo.com/logos/amazon-prime-video-1.svg" alt="Amazon Prime Video">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/disneyplus')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/maxpremium')">
+                <img src="https://logodownload.org/wp-content/uploads/2024/03/max-logo.png" alt="Max">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/crunchyroll')">
+                <img src="https://cdn.worldvectorlogo.com/logos/crunchyroll-1.svg" alt="Crunchyroll">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vix')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/ViX_Logo.svg/2560px-ViX_Logo.svg.png" alt="ViX">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Viki">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/telelatino')">
+                <img src="https://doctor-pandora.odoo.com/web/image/product.template/8/image_1920?unique=889500d" alt="Doctor Pandora">
+            </button>
+            <button class="boton-imagen boton-apple-tv" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/aplletv')">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/paramountplus')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
+            </button>
+            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/plexpremium')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Plex_logo_2022.svg/2560px-Plex_logo_2022.svg.png" alt="Plex">
+            </button>
+            <button class="boton-imagen boton-negro" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/panaxtreaming')">
+                <img src="https://dhgf5mcbrms62.cloudfront.net/110979006/header-fcHJMd/IVsTzWZ-600x600.webp" alt="Nuevo Servicio">
+            </button>
+        </div>
     </div>
 
     <div id="generalModal" class="modal">
         <span class="close-btn" onclick="cerrarModal()">×</span>
         <div class="modal-content">
-            <iframe id="modalFrame" src="" frameborder="0"></iframe>
+            <div class="modal-iframe-container">
+                <iframe id="modalFrame" src="" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
 
     <script>
-        function redirigir(url) {
-            window.location.href = url;
+        function redirigirPrincipal() {
+            window.location.href = 'https://www.vendeygana.net/user/';
         }
 
         function abrirModal(url) {
@@ -217,10 +254,8 @@
             modal.style.display = "none";
             iframe.src = "";
             document.body.style.overflow = "auto";
-            window.location.href = 'https://www.vendeygana.net/user/'; // Redirige al cerrar
         }
 
-        // Cerrar modal al hacer clic fuera del contenido
         window.onclick = function(event) {
             const modal = document.getElementById('generalModal');
             if (event.target == modal) {
