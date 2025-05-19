@@ -163,6 +163,49 @@
             background-position: center;
         }
 
+        /* Estilos para el modal de horario */
+        .horario-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .horario-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .horario-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .horario-modal h2 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+
+        .horario-modal p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
         @media (max-width: 600px) {
             .contenedor-botones {
                 width: 95%;
@@ -226,6 +269,7 @@
         </div>
     </div>
 
+    <!-- Modal para contenido de streaming -->
     <div id="generalModal" class="modal">
         <span class="close-btn" onclick="cerrarModal()">×</span>
         <div class="modal-content">
@@ -235,12 +279,28 @@
         </div>
     </div>
 
+    <!-- Modal para horario de atención -->
+    <div id="horarioModal" class="horario-modal">
+        <div class="horario-modal-content">
+            <span class="horario-modal-close" onclick="cerrarHorarioModal()">×</span>
+            <h2>AVISO IMPORTANTE</h2>
+            <p>ESTIMADO USUARIO: LAS VENTAS DE CUENTAS STREAMING Y RECARGAS DE JUEGOS SE PROCESAN HASTA LAS 10:30 PM DE LUNES A SÁBADO Y SE INICIA SU VENTA DESDE LAS 7 AM. LOS DOMINGOS INICIAN DESDE LAS 9 AM Y HASTA LAS 8 PM.</p>
+            <p>HAS TU SOLICITUD Y LA PROCESAREMOS AL ESTAR EN HORARIO DE ACTIVIDADES.</p>
+        </div>
+    </div>
+
     <script>
         function redirigirPrincipal() {
             window.location.href = 'https://www.vendeygana.net/user/';
         }
 
         function abrirModal(url) {
+            // Verificar si está en horario no laboral antes de abrir el modal
+            if (estaEnHorarioNoLaboral()) {
+                mostrarHorarioModal();
+                return;
+            }
+            
             const modal = document.getElementById('generalModal');
             const iframe = document.getElementById('modalFrame');
             iframe.src = url;
@@ -256,10 +316,65 @@
             document.body.style.overflow = "auto";
         }
 
+        function mostrarHorarioModal() {
+            const modal = document.getElementById('horarioModal');
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+
+        function cerrarHorarioModal() {
+            const modal = document.getElementById('horarioModal');
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        function estaEnHorarioNoLaboral() {
+            const ahora = new Date();
+            const horaActual = ahora.getHours();
+            const minutosActual = ahora.getMinutes();
+            const diaSemana = ahora.getDay(); // 0 (Domingo) a 6 (Sábado)
+            
+            // Convertir hora actual a minutos totales para facilitar la comparación
+            const minutosTotales = horaActual * 60 + minutosActual;
+            
+            // Horario de Lunes a Sábado: después de 22:30 (10:30 PM) hasta antes de 7:00 AM
+            if (diaSemana >= 1 && diaSemana <= 6) {
+                if ((minutosTotales >= 22 * 60 + 30) || (minutosTotales < 7 * 60)) {
+                    return true;
+                }
+            }
+            
+            // Domingo: después de 20:00 (8:00 PM) hasta antes de 7:00 AM del Lunes
+            if (diaSemana === 0) {
+                if (minutosTotales >= 20 * 60) {
+                    return true;
+                }
+            }
+            
+            // Lunes: antes de 7:00 AM (continuación del Domingo)
+            if (diaSemana === 1 && minutosTotales < 7 * 60) {
+                return true;
+            }
+            
+            return false;
+        }
+
         window.onclick = function(event) {
             const modal = document.getElementById('generalModal');
             if (event.target == modal) {
                 cerrarModal();
+            }
+            
+            const horarioModal = document.getElementById('horarioModal');
+            if (event.target == horarioModal) {
+                cerrarHorarioModal();
+            }
+        }
+
+        // Mostrar el modal de horario al cargar la página si está en horario no laboral
+        window.onload = function() {
+            if (estaEnHorarioNoLaboral()) {
+                mostrarHorarioModal();
             }
         }
     </script>
