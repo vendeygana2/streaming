@@ -122,7 +122,7 @@
         .modal-content {
             position: relative;
             width: 90%;
-            height: 90%; /* Adjusted height to fill the modal */
+            height: 90%;
             margin: 2% auto;
             background: white;
             border-radius: 10px;
@@ -161,31 +161,6 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-        }
-
-        /* Estilos para el modal de horario */
-        .horario-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .horario-modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            animation: fadeIn 0.3s;
         }
 
         /* Estilos para el modal de fuera de horario */
@@ -243,31 +218,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .horario-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #555;
-        }
-
-        .horario-modal-close:hover {
-            color: #000;
-        }
-
-        .horario-modal h2 {
-            color: #d32f2f;
-            margin-top: 0;
-        }
-
-        .horario-modal p {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
         @media (max-width: 600px) {
             .contenedor-botones {
                 width: 95%;
@@ -277,17 +227,14 @@
                 margin: 10px;
             }
             
-            .horario-modal-content,
             .fuera-horario-modal-content {
                 padding: 20px;
             }
             
-            .horario-modal h2,
             .fuera-horario-modal h2 {
                 font-size: 20px;
             }
             
-            .horario-modal p,
             .fuera-horario-modal p {
                 font-size: 14px;
             }
@@ -308,7 +255,6 @@
     <div class="contenedor-principal">
         <button class="cerrar-principal-btn" onclick="redirigirPrincipal()">×</button>
         <div class="contenedor-botones">
-            <!-- Cambié el enlace del botón de Netflix -->
             <button class="boton-imagen" onclick="abrirModal('https://vendeygana.forms.app/compran3tflix')">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
             </button>
@@ -330,7 +276,6 @@
             <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Viki">
             </button>
-            <!-- Botón de Flujo TV con nuevo formulario -->
             <button class="boton-imagen" onclick="abrirModal('https://96vxnn73.forms.app/compraflujotv')">
                 <img src="https://tararear.com.ar/wp-content/uploads/2024/11/flujo-tv-smart-tv-apk.jpg" alt="Flujo TV">
             </button>
@@ -345,7 +290,6 @@
             <button class="boton-imagen boton-negro" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/panaxtreaming')">
                 <img src="https://dhgf5mcbrms62.cloudfront.net/110979006/header-fcHJMd/IVsTzWZ-600x600.webp" alt="Nuevo Servicio">
             </button>
-            <!-- Botón de Telelatino ahora al final -->
             <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/telelatino')">
                 <img src="https://doctor-pandora.odoo.com/web/image/product.template/8/image_1920?unique=889500d" alt="Doctor Pandora">
             </button>
@@ -359,16 +303,6 @@
             <div class="modal-iframe-container">
                 <iframe id="modalFrame" src="" frameborder="0"></iframe>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal para horario de atención -->
-    <div id="horarioModal" class="horario-modal">
-        <div class="horario-modal-content">
-            <span class="horario-modal-close" onclick="cerrarHorarioModal()">×</span>
-            <h2>AVISO IMPORTANTE</h2>
-            <p>ESTIMADO USUARIO: LAS VENTAS DE CUENTAS STREAMING Y RECARGAS DE JUEGOS SE PROCESAN HASTA LAS 9 PM DE LUNES A SÁBADO Y SE INICIA SU VENTA DESDE LAS 8 AM. LOS DOMINGOS INICIAN DESDE LAS 10 AM Y HASTA LAS 8 PM.</p>
-            <p>PUEDES HACER TU SOLICITUD EN CUALQUIER MOMENTO, PERO TEN EN CUENTA QUE SERÁ PROCESADA DENTRO DEL HORARIO DE ATENCIÓN.</p>
         </div>
     </div>
 
@@ -410,19 +344,9 @@
             document.body.style.overflow = "auto";
         }
 
-        function mostrarHorarioModal() {
-            const modal = document.getElementById('horarioModal');
-            modal.style.display = "flex";
-        }
-
-        function cerrarHorarioModal() {
-            const modal = document.getElementById('horarioModal');
-            modal.style.display = "none";
-        }
-
         function mostrarFueraHorarioModal(url) {
             const modal = document.getElementById('fueraHorarioModal');
-            modal.dataset.url = url; // Guardamos la URL para usarla luego
+            modal.dataset.url = url;
             modal.style.display = "flex";
         }
 
@@ -436,7 +360,6 @@
             const url = modal.dataset.url;
             cerrarFueraHorarioModal();
             
-            // Abrir el modal con la URL original
             const generalModal = document.getElementById('generalModal');
             const iframe = document.getElementById('modalFrame');
             iframe.src = url;
@@ -450,7 +373,6 @@
             const minutosActual = ahora.getMinutes();
             const diaSemana = ahora.getDay(); // 0 (Domingo) a 6 (Sábado)
             
-            // Convertir hora actual a minutos totales para facilitar la comparación
             const minutosTotales = horaActual * 60 + minutosActual;
             
             // Horario de Lunes a Sábado: 8 AM a 9 PM
@@ -470,53 +392,15 @@
             return false;
         }
 
-        function estaEnHorarioNoLaboral() {
-            const ahora = new Date();
-            const horaActual = ahora.getHours();
-            const minutosActual = ahora.getMinutes();
-            const diaSemana = ahora.getDay(); // 0 (Domingo) a 6 (Sábado)
-            
-            // Convertir hora actual a minutos totales para facilitar la comparación
-            const minutosTotales = horaActual * 60 + minutosActual;
-            
-            // Horario de Lunes a Sábado: después de 9 PM hasta antes de 8 AM
-            if (diaSemana >= 1 && diaSemana <= 6) {
-                if (minutosTotales >= 21 * 60 || minutosTotales < 8 * 60) {
-                    return true;
-                }
-            }
-            
-            // Domingo: después de 8 PM hasta antes de 10 AM del Domingo
-            if (diaSemana === 0) {
-                if (minutosTotales >= 20 * 60 || minutosTotales < 10 * 60) {
-                    return true;
-                }
-            }
-            
-            return false;
-        }
-
         window.onclick = function(event) {
             const modal = document.getElementById('generalModal');
             if (event.target == modal) {
                 cerrarModal();
             }
             
-            const horarioModal = document.getElementById('horarioModal');
-            if (event.target == horarioModal) {
-                cerrarHorarioModal();
-            }
-            
             const fueraHorarioModal = document.getElementById('fueraHorarioModal');
             if (event.target == fueraHorarioModal) {
                 cerrarFueraHorarioModal();
-            }
-        }
-
-        // Mostrar el modal de horario al cargar la página si está en horario no laboral
-        window.onload = function() {
-            if (estaEnHorarioNoLaboral()) {
-                mostrarHorarioModal();
             }
         }
     </script>
