@@ -188,6 +188,56 @@
             animation: fadeIn 0.3s;
         }
 
+        /* Estilos para el modal de fuera de horario */
+        .fuera-horario-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fuera-horario-modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+
+        .fuera-horario-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .fuera-horario-modal-close:hover {
+            color: #000;
+        }
+
+        .fuera-horario-modal h2 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+
+        .fuera-horario-modal p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -227,15 +277,18 @@
                 margin: 10px;
             }
             
-            .horario-modal-content {
+            .horario-modal-content,
+            .fuera-horario-modal-content {
                 padding: 20px;
             }
             
-            .horario-modal h2 {
+            .horario-modal h2,
+            .fuera-horario-modal h2 {
                 font-size: 20px;
             }
             
-            .horario-modal p {
+            .horario-modal p,
+            .fuera-horario-modal p {
                 font-size: 14px;
             }
         }
@@ -314,8 +367,20 @@
         <div class="horario-modal-content">
             <span class="horario-modal-close" onclick="cerrarHorarioModal()">×</span>
             <h2>AVISO IMPORTANTE</h2>
-            <p>ESTIMADO USUARIO: LAS VENTAS DE CUENTAS STREAMING Y RECARGAS DE JUEGOS SE PROCESAN HASTA LAS 10:30 PM DE LUNES A SÁBADO Y SE INICIA SU VENTA DESDE LAS 7 AM. LOS DOMINGOS INICIAN DESDE LAS 9 AM Y HASTA LAS 8 PM.</p>
+            <p>ESTIMADO USUARIO: LAS VENTAS DE CUENTAS STREAMING Y RECARGAS DE JUEGOS SE PROCESAN HASTA LAS 9 PM DE LUNES A SÁBADO Y SE INICIA SU VENTA DESDE LAS 8 AM. LOS DOMINGOS INICIAN DESDE LAS 10 AM Y HASTA LAS 8 PM.</p>
             <p>PUEDES HACER TU SOLICITUD EN CUALQUIER MOMENTO, PERO TEN EN CUENTA QUE SERÁ PROCESADA DENTRO DEL HORARIO DE ATENCIÓN.</p>
+        </div>
+    </div>
+
+    <!-- Modal para fuera de horario -->
+    <div id="fueraHorarioModal" class="fuera-horario-modal">
+        <div class="fuera-horario-modal-content">
+            <span class="fuera-horario-modal-close" onclick="cerrarFueraHorarioModal()">×</span>
+            <h2>ATENCIÓN</h2>
+            <p>ESTIMADO USUARIO: POR EL MOMENTO NUESTRO PERSONAL Y DEPARTAMENTO STREAMING ESTÁ EN DESCANSO Y NO PODEMOS PROCESAR TU SOLICITUD.</p>
+            <p>PUEDES HACER EL PEDIDO Y SERÁ PROCESADO AL ESTAR OTRA VEZ LABORANDO.</p>
+            <p>HORARIO DE ATENCIÓN: LUNES A SÁBADO DE 8 AM A 9 PM Y DOMINGOS DE 10 AM A 8 PM</p>
+            <button onclick="continuarFueraHorario()" style="background-color: #d32f2f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 15px;">CONTINUAR CON MI SOLICITUD</button>
         </div>
     </div>
 
@@ -325,6 +390,11 @@
         }
 
         function abrirModal(url) {
+            if (estaFueraDeHorario()) {
+                mostrarFueraHorarioModal(url);
+                return;
+            }
+            
             const modal = document.getElementById('generalModal');
             const iframe = document.getElementById('modalFrame');
             iframe.src = url;
@@ -350,6 +420,56 @@
             modal.style.display = "none";
         }
 
+        function mostrarFueraHorarioModal(url) {
+            const modal = document.getElementById('fueraHorarioModal');
+            modal.dataset.url = url; // Guardamos la URL para usarla luego
+            modal.style.display = "flex";
+        }
+
+        function cerrarFueraHorarioModal() {
+            const modal = document.getElementById('fueraHorarioModal');
+            modal.style.display = "none";
+        }
+
+        function continuarFueraHorario() {
+            const modal = document.getElementById('fueraHorarioModal');
+            const url = modal.dataset.url;
+            cerrarFueraHorarioModal();
+            
+            // Abrir el modal con la URL original
+            const generalModal = document.getElementById('generalModal');
+            const iframe = document.getElementById('modalFrame');
+            iframe.src = url;
+            generalModal.style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function estaFueraDeHorario() {
+            const ahora = new Date();
+            const horaActual = ahora.getHours();
+            const minutosActual = ahora.getMinutes();
+            const diaSemana = ahora.getDay(); // 0 (Domingo) a 6 (Sábado)
+            
+            // Convertir hora actual a minutos totales para facilitar la comparación
+            const minutosTotales = horaActual * 60 + minutosActual;
+            
+            // Horario de Lunes a Sábado: 8 AM a 9 PM
+            if (diaSemana >= 1 && diaSemana <= 6) {
+                if (minutosTotales < 8 * 60 || minutosTotales >= 21 * 60) {
+                    return true;
+                }
+            }
+            
+            // Domingo: 10 AM a 8 PM
+            if (diaSemana === 0) {
+                if (minutosTotales < 10 * 60 || minutosTotales >= 20 * 60) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
         function estaEnHorarioNoLaboral() {
             const ahora = new Date();
             const horaActual = ahora.getHours();
@@ -359,23 +479,18 @@
             // Convertir hora actual a minutos totales para facilitar la comparación
             const minutosTotales = horaActual * 60 + minutosActual;
             
-            // Horario de Lunes a Sábado: después de 22:30 (10:30 PM) hasta antes de 7:00 AM
+            // Horario de Lunes a Sábado: después de 9 PM hasta antes de 8 AM
             if (diaSemana >= 1 && diaSemana <= 6) {
-                if ((minutosTotales >= 22 * 60 + 30) || (minutosTotales < 7 * 60)) {
+                if (minutosTotales >= 21 * 60 || minutosTotales < 8 * 60) {
                     return true;
                 }
             }
             
-            // Domingo: después de 20:00 (8:00 PM) hasta antes de 7:00 AM del Lunes
+            // Domingo: después de 8 PM hasta antes de 10 AM del Domingo
             if (diaSemana === 0) {
-                if (minutosTotales >= 20 * 60) {
+                if (minutosTotales >= 20 * 60 || minutosTotales < 10 * 60) {
                     return true;
                 }
-            }
-            
-            // Lunes: antes de 7:00 AM (continuación del Domingo)
-            if (diaSemana === 1 && minutosTotales < 7 * 60) {
-                return true;
             }
             
             return false;
@@ -390,6 +505,11 @@
             const horarioModal = document.getElementById('horarioModal');
             if (event.target == horarioModal) {
                 cerrarHorarioModal();
+            }
+            
+            const fueraHorarioModal = document.getElementById('fueraHorarioModal');
+            if (event.target == fueraHorarioModal) {
+                cerrarFueraHorarioModal();
             }
         }
 
