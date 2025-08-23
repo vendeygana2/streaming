@@ -42,6 +42,13 @@
             padding: 20px;
             max-width: 900px;
             width: 95%;
+            filter: blur(0);
+            transition: filter 0.3s ease;
+        }
+
+        .contenedor-principal.blurred {
+            filter: blur(5px);
+            pointer-events: none;
         }
 
         .cerrar-principal-btn {
@@ -213,6 +220,109 @@
             margin-bottom: 10px;
         }
 
+        /* Estilos para el modal de mantenimiento */
+        .mantenimiento-modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mantenimiento-modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: popIn 0.5s;
+        }
+
+        .mantenimiento-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #555;
+            transition: color 0.3s;
+        }
+
+        .mantenimiento-modal-close:hover {
+            color: #000;
+        }
+
+        .mantenimiento-icono {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background-color: #ff9800;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .mantenimiento-icono svg {
+            width: 60px;
+            height: 60px;
+            fill: white;
+        }
+
+        .mantenimiento-modal h2 {
+            color: #ff9800;
+            margin-top: 0;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .mantenimiento-modal p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .mantenimiento-btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(255, 152, 0, 0.3);
+        }
+
+        .mantenimiento-btn:hover {
+            background-color: #f57c00;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 152, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 152, 0, 0); }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -238,6 +348,28 @@
             .fuera-horario-modal p {
                 font-size: 14px;
             }
+            
+            .mantenimiento-modal-content {
+                padding: 25px;
+            }
+            
+            .mantenimiento-icono {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .mantenimiento-icono svg {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .mantenimiento-modal h2 {
+                font-size: 24px;
+            }
+            
+            .mantenimiento-modal p {
+                font-size: 16px;
+            }
         }
 
         @media (min-width: 601px) and (max-width: 900px) {
@@ -252,7 +384,23 @@
     </style>
 </head>
 <body>
-    <div class="contenedor-principal">
+    <!-- Modal de mantenimiento -->
+    <div id="mantenimientoModal" class="mantenimiento-modal">
+        <div class="mantenimiento-modal-content">
+            <span class="mantenimiento-modal-close" onclick="cerrarMantenimientoModal()">×</span>
+            <div class="mantenimiento-icono">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <h2>MANTENIMIENTO EN CURSO</h2>
+            <p>EN ESTOS MOMENTOS TENEMOS UNA VENTANA DE MANTENIMIENTO. EN BREVE NUESTROS SERVICIOS ESTARÁN NUEVAMENTE ACTIVOS.</p>
+            <p>AGRADECEMOS SU COMPRENSIÓN Y PACIENCIA.</p>
+            <button class="mantenimiento-btn" onclick="cerrarMantenimientoModal()">ENTENDIDO</button>
+        </div>
+    </div>
+
+    <div class="contenedor-principal" id="contenedorPrincipal">
         <button class="cerrar-principal-btn" onclick="redirigirPrincipal()">×</button>
         <div class="contenedor-botones">
             <button class="boton-imagen" onclick="abrirModal('https://vendeygana.forms.app/compran3tflix')">
@@ -310,11 +458,27 @@
     </div>
 
     <script>
+        // Mostrar modal de mantenimiento al cargar la página
+        window.onload = function() {
+            document.getElementById('mantenimientoModal').style.display = 'flex';
+            document.getElementById('contenedorPrincipal').classList.add('blurred');
+        };
+
+        function cerrarMantenimientoModal() {
+            document.getElementById('mantenimientoModal').style.display = 'none';
+            document.getElementById('contenedorPrincipal').classList.remove('blurred');
+        }
+
         function redirigirPrincipal() {
             window.location.href = 'https://www.vendeygana.net/user/';
         }
 
         function abrirModal(url) {
+            // Verificar si el modal de mantenimiento está activo
+            if (document.getElementById('mantenimientoModal').style.display === 'flex') {
+                return; // No hacer nada si el mantenimiento está activo
+            }
+            
             if (estaFueraDeHorario()) {
                 mostrarFueraHorarioModal(url);
                 return;
@@ -392,6 +556,11 @@
             const fueraHorarioModal = document.getElementById('fueraHorarioModal');
             if (event.target == fueraHorarioModal) {
                 cerrarFueraHorarioModal();
+            }
+            
+            const mantenimientoModal = document.getElementById('mantenimientoModal');
+            if (event.target == mantenimientoModal) {
+                cerrarMantenimientoModal();
             }
         }
     </script>
