@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuentas de Entretenimiento</title>
+    <title>Botón de Cuentas de Entretenimiento</title>
     <style>
         * {
             margin: 0;
@@ -12,184 +12,307 @@
         }
         
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #ed7318;
+            background-color: #ed7318;
+            padding: 20px;
             overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
         
         .button-container {
-            position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
+            margin: 30px 0;
+            position: relative;
         }
         
-        .redirect-button {
-            border: none;
-            background: none;
+        .custom-button {
+            display: inline-block;
             cursor: pointer;
-            transition: all 0.3s ease;
+            border: none;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            padding: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
             position: relative;
-            z-index: 10;
         }
         
-        .redirect-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+        .custom-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .custom-button:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
         }
         
         .button-image {
-            width: 350px;
-            height: auto;
             display: block;
-            border-radius: 12px;
+            width: 100%;
+            height: auto;
+            max-width: 400px;
         }
         
-        .logos-container {
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #ed7318;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+        
+        .info-box h3 {
+            color: #ed7318;
+            margin-bottom: 10px;
+        }
+        
+        .typewriter-container {
+            position: relative;
+            min-height: 80px;
+        }
+        
+        .typewriter-text {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+        
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #ed7318;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+        
+        /* Efectos de entretenimiento */
+        .entertainment-element {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-size: 20px;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            z-index: 0;
             pointer-events: none;
         }
         
-        .button-container:hover .logos-container {
-            opacity: 1;
+        .element-1 { color: #ff6b6b; }
+        .element-2 { color: #4ecdc4; }
+        .element-3 { color: #ffd166; }
+        .element-4 { color: #06d6a0; }
+        .element-5 { color: #118ab2; }
+        .element-6 { color: #ef476f; }
+        
+        @keyframes float-element {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
         }
         
-        .logo {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background: white;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s ease;
-            text-align: center;
-            padding: 5px;
-            color: white;
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
         }
         
-        /* Netflix */
-        .logo-1 {
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%) scale(0);
-            background: #E50914;
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .button-image {
+                max-width: 300px;
+            }
         }
         
-        /* Amazon Prime */
-        .logo-2 {
-            top: 20%;
-            right: -40px;
-            transform: translateY(-50%) scale(0);
-            background: #00A8E1;
-        }
-        
-        /* Disney Plus */
-        .logo-3 {
-            bottom: 20%;
-            right: -40px;
-            transform: translateY(50%) scale(0);
-            background: #113CCF;
-        }
-        
-        /* Max */
-        .logo-4 {
-            bottom: -40px;
-            left: 50%;
-            transform: translateX(-50%) scale(0);
-            background: #00A2FF;
-        }
-        
-        /* Paramount */
-        .logo-5 {
-            bottom: 20%;
-            left: -40px;
-            transform: translateY(50%) scale(0);
-            background: #0066FF;
-        }
-        
-        /* Crunchyroll */
-        .logo-6 {
-            top: 20%;
-            left: -40px;
-            transform: translateY(-50%) scale(0);
-            background: #F47521;
-        }
-        
-        .button-container:hover .logo-1 {
-            transform: translateX(-50%) scale(1);
-            top: -80px;
-        }
-        
-        .button-container:hover .logo-2 {
-            transform: translateY(-50%) scale(1);
-            right: -80px;
-        }
-        
-        .button-container:hover .logo-3 {
-            transform: translateY(50%) scale(1);
-            right: -80px;
-        }
-        
-        .button-container:hover .logo-4 {
-            transform: translateX(-50%) scale(1);
-            bottom: -80px;
-        }
-        
-        .button-container:hover .logo-5 {
-            transform: translateY(50%) scale(1);
-            left: -80px;
-        }
-        
-        .button-container:hover .logo-6 {
-            transform: translateY(-50%) scale(1);
-            left: -80px;
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .button-image {
+                max-width: 250px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="button-container">
-        <button class="redirect-button" onclick="redirectToLink()">
-            <img src="https://i.pinimg.com/736x/4d/1f/8f/4d1f8fb31513c7382d9ea1bb58fa3b54.jpg" 
-                 alt="Cuentas de Entretenimiento" 
-                 class="button-image">
-        </button>
+    <div class="container">
+        <h1>Cuentas de Entretenimiento Premium</h1>
+        <p>Haz clic en el botón para acceder a nuestras suscripciones premium para tus plataformas de entretenimiento favoritas</p>
         
-        <div class="logos-container">
-            <div class="logo logo-1">Netflix</div>
-            <div class="logo logo-2">Amazon Prime</div>
-            <div class="logo logo-3">Disney Plus</div>
-            <div class="logo logo-4">Max</div>
-            <div class="logo logo-5">Paramount</div>
-            <div class="logo logo-6">Crunchyroll</div>
+        <div class="button-container">
+            <a href="https://cuentasvendeygana.company.site/products/cuentas-entretenimiento" target="_blank" class="custom-button" id="entertainment-button">
+                <img src="https://i.pinimg.com/736x/70/79/03/7079034963e4a85187b6c119875af3d8.jpg" 
+                     alt="Cuentas de Entretenimiento Premium" 
+                     class="button-image">
+            </a>
+        </div>
+        
+        <div class="info-box">
+            <h3>¿Qué encontrarás?</h3>
+            <div class="typewriter-container" id="typewriter-container">
+                <!-- El texto se generará dinámicamente con JavaScript -->
+            </div>
         </div>
     </div>
 
+    <!-- Audio para el efecto de sonido -->
+    <audio id="entertainment-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        function redirectToLink() {
-            window.location.href = "https://cuentasvendeygana.company.site/products/cuentas-entretenimiento";
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = "Encontrarás suscripciones premium para las mejores plataformas de entretenimiento: Netflix, Amazon Prime, Disney Plus, Max, Crunchyroll, HBO Max, Paramount+ y muchas más. Disfruta de series, películas, anime y contenido exclusivo con todas las funciones premium al mejor precio del mercado.";
+            const container = document.getElementById('typewriter-container');
+            const entertainmentButton = document.getElementById('entertainment-button');
+            const entertainmentSound = document.getElementById('entertainment-sound');
+            const speed = 50; // Velocidad de escritura en milisegundos
+            
+            // Símbolos de entretenimiento
+            const entertainmentElements = ['🎬', '📺', '🍿', '🎭', '🌟', '🎪', '🎮', '📽️'];
+            
+            function typeWriter() {
+                container.innerHTML = ''; // Limpiar contenedor
+                let i = 0;
+                
+                function type() {
+                    if (i < text.length) {
+                        // Crear un span para el texto ya escrito
+                        const typedSpan = document.createElement('span');
+                        typedSpan.className = 'typewriter-text';
+                        typedSpan.textContent = text.substring(0, i + 1);
+                        
+                        // Crear cursor
+                        const cursorSpan = document.createElement('span');
+                        cursorSpan.className = 'typewriter-cursor';
+                        
+                        // Actualizar contenido
+                        container.innerHTML = '';
+                        container.appendChild(typedSpan);
+                        container.appendChild(cursorSpan);
+                        
+                        i++;
+                        setTimeout(type, speed);
+                    } else {
+                        // Cuando termine, mostrar solo el texto sin cursor
+                        const finalText = document.createElement('span');
+                        finalText.className = 'typewriter-text';
+                        finalText.textContent = text;
+                        container.innerHTML = '';
+                        container.appendChild(finalText);
+                    }
+                }
+                
+                type();
+            }
+            
+            // Función para crear elementos de entretenimiento
+            function createEntertainmentElements() {
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => {
+                        const element = document.createElement('div');
+                        element.className = `entertainment-element element-${(i % 6) + 1}`;
+                        element.textContent = entertainmentElements[i % entertainmentElements.length];
+                        
+                        // Posición aleatoria alrededor del botón
+                        const buttonRect = entertainmentButton.getBoundingClientRect();
+                        const randomX = Math.random() * buttonRect.width;
+                        
+                        element.style.left = `${buttonRect.left + randomX}px`;
+                        element.style.top = `${buttonRect.bottom}px`;
+                        
+                        document.body.appendChild(element);
+                        
+                        // Animación del elemento
+                        element.style.animation = `float-element 2s ease-out forwards`;
+                        
+                        // Eliminar el elemento después de la animación
+                        setTimeout(() => {
+                            if (element.parentNode) {
+                                element.parentNode.removeChild(element);
+                            }
+                        }, 2000);
+                    }, i * 80);
+                }
+            }
+            
+            // Evento para el botón de entretenimiento
+            entertainmentButton.addEventListener('click', function(e) {
+                // Reproducir sonido
+                entertainmentSound.currentTime = 0;
+                entertainmentSound.play().catch(error => {
+                    console.log('La reproducción automática de audio fue prevenida:', error);
+                });
+                
+                // Crear elementos de entretenimiento
+                createEntertainmentElements();
+                
+                // Efecto de pulsación
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+            
+            // Efecto de elementos al pasar el mouse
+            entertainmentButton.addEventListener('mouseenter', function() {
+                createEntertainmentElements();
+            });
+            
+            // Iniciar efecto máquina de escribir
+            typeWriter();
+        });
     </script>
 </body>
 </html>
