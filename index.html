@@ -3,398 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botones de Streaming</title>
+    <title>Cuentas de Entretenimiento</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
+            font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://ecdisis.com/wp-content/uploads/2021/01/plataformas-de-streaming-900x506-1.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-
-        .contenedor-principal {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            max-width: 900px;
-            width: 95%;
-        }
-
-        .cerrar-principal-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
-            z-index: 10;
-            background: none;
-            border: none;
-            padding: 0;
-            line-height: 1;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        .cerrar-principal-btn:hover {
-            color: #000;
-        }
-
-        .contenedor-botones {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .boton-imagen {
-            background: white;
-            border: none;
-            padding: 15px;
-            margin: 15px;
-            cursor: pointer;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 180px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0;
-        }
-
-        .boton-imagen:hover {
-            transform: translateY(-5px);
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .boton-imagen img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .boton-negro {
-            background-color: #000000;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .boton-negro:hover {
-            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            position: relative;
-            width: 90%;
-            height: 90%;
-            margin: 2% auto;
-            background: white;
-            border-radius: 10px;
+            background: #ed7318;
             overflow: hidden;
+        }
+        
+        .button-container {
+            position: relative;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-
-        .modal-iframe-container {
-            flex-grow: 1;
-            overflow: auto;
-            width: 100%;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1001;
-            text-shadow: 0 0 5px black;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
+        
+        .redirect-button {
             border: none;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            padding: 0;
+            position: relative;
+            z-index: 10;
         }
-
-        .boton-apple-tv {
-            background-color: black;
-            background-image: url('https://i0.wp.com/pub-f354ec240bea480db7320bd0e29d972e.r2.dev/sites/4/Untitled-21-c6199aa35e300684ffb7.png?fit=1200%2C675&ssl=1');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+        
+        .redirect-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
-
-        /* Estilos para el modal de fuera de horario */
-        .fuera-horario-modal {
-            display: none;
-            position: fixed;
+        
+        .button-image {
+            width: 350px;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .logos-container {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
+            display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
-
-        .fuera-horario-modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-            animation: fadeIn 0.3s;
+        
+        .button-container:hover .logos-container {
+            opacity: 1;
         }
-
-        .fuera-horario-modal-close {
+        
+        .logo {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-weight: bold;
-            cursor: pointer;
-            color: #555;
+            font-size: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            text-align: center;
+            padding: 5px;
+            color: white;
         }
-
-        .fuera-horario-modal-close:hover {
-            color: #000;
+        
+        /* Netflix */
+        .logo-1 {
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: #E50914;
         }
-
-        .fuera-horario-modal h2 {
-            color: #d32f2f;
-            margin-top: 0;
+        
+        /* Amazon Prime */
+        .logo-2 {
+            top: 20%;
+            right: -40px;
+            transform: translateY(-50%) scale(0);
+            background: #00A8E1;
         }
-
-        .fuera-horario-modal p {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 10px;
+        
+        /* Disney Plus */
+        .logo-3 {
+            bottom: 20%;
+            right: -40px;
+            transform: translateY(50%) scale(0);
+            background: #113CCF;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        /* Max */
+        .logo-4 {
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            background: #00A2FF;
         }
-
-        @media (max-width: 600px) {
-            .contenedor-botones {
-                width: 95%;
-            }
-            .boton-imagen {
-                width: calc(50% - 20px);
-                margin: 10px;
-            }
-            
-            .fuera-horario-modal-content {
-                padding: 20px;
-            }
-            
-            .fuera-horario-modal h2 {
-                font-size: 20px;
-            }
-            
-            .fuera-horario-modal p {
-                font-size: 14px;
-            }
+        
+        /* Paramount */
+        .logo-5 {
+            bottom: 20%;
+            left: -40px;
+            transform: translateY(50%) scale(0);
+            background: #0066FF;
         }
-
-        @media (min-width: 601px) and (max-width: 900px) {
-            .contenedor-botones {
-                width: 90%;
-            }
-            .boton-imagen {
-                width: calc(33.33% - 20px);
-                margin: 10px;
-            }
+        
+        /* Crunchyroll */
+        .logo-6 {
+            top: 20%;
+            left: -40px;
+            transform: translateY(-50%) scale(0);
+            background: #F47521;
+        }
+        
+        .button-container:hover .logo-1 {
+            transform: translateX(-50%) scale(1);
+            top: -80px;
+        }
+        
+        .button-container:hover .logo-2 {
+            transform: translateY(-50%) scale(1);
+            right: -80px;
+        }
+        
+        .button-container:hover .logo-3 {
+            transform: translateY(50%) scale(1);
+            right: -80px;
+        }
+        
+        .button-container:hover .logo-4 {
+            transform: translateX(-50%) scale(1);
+            bottom: -80px;
+        }
+        
+        .button-container:hover .logo-5 {
+            transform: translateY(50%) scale(1);
+            left: -80px;
+        }
+        
+        .button-container:hover .logo-6 {
+            transform: translateY(-50%) scale(1);
+            left: -80px;
         }
     </style>
 </head>
 <body>
-    <div class="contenedor-principal" id="contenedorPrincipal">
-        <button class="cerrar-principal-btn" onclick="redirigirPrincipal()">×</button>
-        <div class="contenedor-botones">
-            <button class="boton-imagen" onclick="abrirModal('https://vendeygana.forms.app/compran3tflixnuevo')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/amazonprime')">
-                <img src="https://cdn.worldvectorlogo.com/logos/amazon-prime-video-1.svg" alt="Amazon Prime Video">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/disneyplus')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/maxpremium')">
-                <img src="https://logodownload.org/wp-content/uploads/2024/03/max-logo.png" alt="Max">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/crunchyroll')">
-                <img src="https://cdn.worldvectorlogo.com/logos/crunchyroll-1.svg" alt="Crunchyroll">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vix')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/ViX_Logo.svg/2560px-ViX_Logo.svg.png" alt="ViX">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/vikyrakuten')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Rakuten_Viki_Logo_2019.svg/1200px-Rakuten_Viki_Logo_2019.svg.png" alt="Viki">
-            </button>
-            <button class="boton-imagen boton-apple-tv" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/aplletv')">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/paramountplus')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Paramount%2B_logo.png" alt="Paramount+">
-            </button>
-            <button class="boton-imagen" onclick="abrirModal('https://online.forms.app/respuestasdereportesdefa/plexpremium')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Plex_logo_2022.svg/2560px-Plex_logo_2022.svg.png" alt="Plex">
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal para contenido de streaming -->
-    <div id="generalModal" class="modal">
-        <span class="close-btn" onclick="cerrarModal()">×</span>
-        <div class="modal-content">
-            <div class="modal-iframe-container">
-                <iframe id="modalFrame" src="" frameborder="0"></iframe>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal para fuera de horario -->
-    <div id="fueraHorarioModal" class="fuera-horario-modal">
-        <div class="fuera-horario-modal-content">
-            <span class="fuera-horario-modal-close" onclick="cerrarFueraHorarioModal()">×</span>
-            <h2>ATENCIÓN</h2>
-            <p>ESTIMADO USUARIO: POR EL MOMENTO NUESTRO PERSONAL Y DEPARTAMENTO STREAMING ESTÁ EN DESCANSO Y NO PODEMOS PROCESAR TU SOLICITUD.</p>
-            <p>PUEDES HACER EL PEDIDO Y SERÁ PROCESADO AL ESTAR OTRA VEZ LABORANDO.</p>
-            <p>HORARIO DE ATENCIÓN: LUNES A SÁBADO DE 8 AM A 9 PM Y DOMINGOS DE 10 AM A 8 PM</p>
-            <button onclick="continuarFueraHorario()" style="background-color: #d32f2f; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 15px;">CONTINUAR CON MI SOLICITUD</button>
+    <div class="button-container">
+        <button class="redirect-button" onclick="redirectToLink()">
+            <img src="https://i.pinimg.com/736x/4d/1f/8f/4d1f8fb31513c7382d9ea1bb58fa3b54.jpg" 
+                 alt="Cuentas de Entretenimiento" 
+                 class="button-image">
+        </button>
+        
+        <div class="logos-container">
+            <div class="logo logo-1">Netflix</div>
+            <div class="logo logo-2">Amazon Prime</div>
+            <div class="logo logo-3">Disney Plus</div>
+            <div class="logo logo-4">Max</div>
+            <div class="logo logo-5">Paramount</div>
+            <div class="logo logo-6">Crunchyroll</div>
         </div>
     </div>
 
     <script>
-        function redirigirPrincipal() {
-            window.location.href = 'https://www.vendeygana.net/user/';
-        }
-
-        function abrirModal(url) {
-            if (estaFueraDeHorario()) {
-                mostrarFueraHorarioModal(url);
-                return;
-            }
-            
-            const modal = document.getElementById('generalModal');
-            const iframe = document.getElementById('modalFrame');
-            iframe.src = url;
-            modal.style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-
-        function cerrarModal() {
-            const modal = document.getElementById('generalModal');
-            const iframe = document.getElementById('modalFrame');
-            modal.style.display = "none";
-            iframe.src = "";
-            document.body.style.overflow = "auto";
-        }
-
-        function mostrarFueraHorarioModal(url) {
-            const modal = document.getElementById('fueraHorarioModal');
-            modal.dataset.url = url;
-            modal.style.display = "flex";
-        }
-
-        function cerrarFueraHorarioModal() {
-            const modal = document.getElementById('fueraHorarioModal');
-            modal.style.display = "none";
-        }
-
-        function continuarFueraHorario() {
-            const modal = document.getElementById('fueraHorarioModal');
-            const url = modal.dataset.url;
-            cerrarFueraHorarioModal();
-            
-            const generalModal = document.getElementById('generalModal');
-            const iframe = document.getElementById('modalFrame');
-            iframe.src = url;
-            generalModal.style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-
-        function estaFueraDeHorario() {
-            const ahora = new Date();
-            const horaActual = ahora.getHours();
-            const minutosActual = ahora.getMinutes();
-            const diaSemana = ahora.getDay(); // 0 (Domingo) a 6 (Sábado)
-            
-            const minutosTotales = horaActual * 60 + minutosActual;
-            
-            // Horario de Lunes a Sábado: 8 AM a 9 PM
-            if (diaSemana >= 1 && diaSemana <= 6) {
-                if (minutosTotales < 8 * 60 || minutosTotales >= 21 * 60) {
-                    return true;
-                }
-            }
-            
-            // Domingo: 10 AM a 8 PM
-            if (diaSemana === 0) {
-                if (minutosTotales < 10 * 60 || minutosTotales >= 20 * 60) {
-                    return true;
-                }
-            }
-            
-            return false;
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('generalModal');
-            if (event.target == modal) {
-                cerrarModal();
-            }
-            
-            const fueraHorarioModal = document.getElementById('fueraHorarioModal');
-            if (event.target == fueraHorarioModal) {
-                cerrarFueraHorarioModal();
-            }
+        function redirectToLink() {
+            window.location.href = "https://cuentasvendeygana.company.site/products/cuentas-entretenimiento";
         }
     </script>
-    <script type="text/javascript" src="https://smartarget.online/loader.js?u=3a9cb769fbc5bbbff96e2f604c565e13679272a0"></script>
 </body>
 </html>
