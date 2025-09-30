@@ -219,38 +219,22 @@
             font-size: 1.1rem;
         }
         
-        .modal-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
         .modal-button {
-            padding: 10px 20px;
+            padding: 12px 30px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-        }
-        
-        .modal-button-primary {
             background-color: #ed7318;
             color: white;
+            margin-top: 20px;
+            font-size: 1rem;
         }
         
-        .modal-button-primary:hover {
+        .modal-button:hover {
             background-color: #d1620e;
-        }
-        
-        .modal-button-secondary {
-            background-color: #e9ecef;
-            color: #495057;
-        }
-        
-        .modal-button-secondary:hover {
-            background-color: #dee2e6;
+            transform: translateY(-2px);
         }
         
         /* Media queries específicas para diferentes tamaños */
@@ -285,11 +269,6 @@
             
             .modal-content {
                 padding: 20px;
-            }
-            
-            .modal-buttons {
-                flex-direction: column;
-                gap: 10px;
             }
         }
         
@@ -400,10 +379,7 @@
                 <p>Domingos: 10:00 AM a 7:00 PM</p>
             </div>
             
-            <div class="modal-buttons">
-                <button id="modal-continuar" class="modal-button modal-button-primary">Continuar al sitio</button>
-                <button id="modal-cerrar" class="modal-button modal-button-secondary">Cerrar</button>
-            </div>
+            <button id="modal-entendido" class="modal-button">ENTENDIDO</button>
         </div>
     </div>
 
@@ -419,12 +395,14 @@
             const entertainmentButton = document.getElementById('entertainment-button');
             const entertainmentSound = document.getElementById('entertainment-sound');
             const horarioModal = document.getElementById('horario-modal');
-            const modalContinuar = document.getElementById('modal-continuar');
-            const modalCerrar = document.getElementById('modal-cerrar');
+            const modalEntendido = document.getElementById('modal-entendido');
             const speed = 50; // Velocidad de escritura en milisegundos
             
             // Símbolos de entretenimiento
             const entertainmentElements = ['🎬', '📺', '🍿', '🎭', '🌟', '🎪', '🎮', '📽️'];
+            
+            // Variable para controlar si el usuario ya vio el modal
+            let modalVisto = false;
             
             // Función para verificar si estamos fuera del horario de atención
             function estaFueraDeHorario() {
@@ -450,20 +428,15 @@
                 return false;
             }
             
-            // Mostrar modal si estamos fuera de horario
-            if (estaFueraDeHorario()) {
+            // Mostrar modal si estamos fuera de horario y el usuario no lo ha visto aún
+            if (estaFueraDeHorario() && !modalVisto) {
                 horarioModal.style.display = 'flex';
             }
             
-            // Eventos para los botones del modal
-            modalContinuar.addEventListener('click', function() {
+            // Evento para el botón ENTENDIDO del modal
+            modalEntendido.addEventListener('click', function() {
                 horarioModal.style.display = 'none';
-                // Aquí podrías redirigir al sitio si lo deseas
-                // window.location.href = "https://cuentasvendeygana.company.site/products/cuentas-entretenimiento";
-            });
-            
-            modalCerrar.addEventListener('click', function() {
-                horarioModal.style.display = 'none';
+                modalVisto = true;
             });
             
             function typeWriter() {
@@ -533,8 +506,8 @@
             
             // Evento para el botón de entretenimiento
             entertainmentButton.addEventListener('click', function(e) {
-                // Si estamos fuera de horario, mostrar modal y prevenir la acción por defecto
-                if (estaFueraDeHorario()) {
+                // Si estamos fuera de horario y el usuario no ha visto el modal, mostrarlo y prevenir la acción por defecto
+                if (estaFueraDeHorario() && !modalVisto) {
                     e.preventDefault();
                     horarioModal.style.display = 'flex';
                     return;
