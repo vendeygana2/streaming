@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botón de Cuentas de Entretenimiento</title>
+    <title>Cuentas de Entretenimiento Premium</title>
     <style>
         * {
             margin: 0;
@@ -173,17 +173,22 @@
             align-items: center;
             z-index: 1000;
             padding: 15px;
+            overflow-y: auto;
         }
         
         .modal-content {
             background-color: white;
             border-radius: 15px;
             padding: 25px;
-            max-width: 500px;
+            max-width: 95%;
             width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
         
         .modal-icon {
@@ -195,13 +200,14 @@
         .modal-title {
             color: #333;
             margin-bottom: 15px;
-            font-size: 1.5rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
         }
         
         .modal-message {
             color: #555;
             margin-bottom: 20px;
             line-height: 1.5;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
         }
         
         .modal-horario {
@@ -216,7 +222,80 @@
         .modal-horario h4 {
             color: #ed7318;
             margin-bottom: 8px;
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+        
+        .telegram-section {
+            background-color: #e3f2fd;
+            border-left: 4px solid #0088cc;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+        
+        .telegram-section h4 {
+            color: #0088cc;
+            margin-bottom: 10px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+        }
+        
+        .telegram-section p {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+            margin: 15px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .telegram-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .telegram-button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .telegram-button.telegram {
+            background-color: #0088cc;
+            color: white;
+        }
+        
+        .telegram-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .modal-button {
@@ -269,6 +348,8 @@
             
             .modal-content {
                 padding: 20px;
+                max-width: 98%;
+                max-height: 98vh;
             }
         }
         
@@ -308,6 +389,10 @@
             
             .modal-title {
                 font-size: 1.3rem;
+            }
+            
+            .telegram-buttons {
+                flex-direction: column;
             }
         }
         
@@ -379,6 +464,26 @@
                 <p>Domingos: 10:00 AM a 7:00 PM</p>
             </div>
             
+            <div class="telegram-section">
+                <h4>¿Prefieres compra automática 24/7?</h4>
+                <p>Si prefieres puedes usar nuestro canal de Telegram de compra automática que funciona 24/7 los 365 días del año.</p>
+                
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/6m05VrOlsy0" 
+                            title="Video explicativo de compra automática" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div class="telegram-buttons">
+                    <a href="https://t.me/panaxvendeygana_bot" target="_blank" class="telegram-button telegram">
+                        <span>📱</span> Ir al canal de Telegram
+                    </a>
+                </div>
+            </div>
+            
             <button id="modal-entendido" class="modal-button">ENTENDIDO</button>
         </div>
     </div>
@@ -437,6 +542,14 @@
             modalEntendido.addEventListener('click', function() {
                 horarioModal.style.display = 'none';
                 modalVisto = true;
+            });
+            
+            // Cerrar modal al hacer clic fuera del contenido
+            horarioModal.addEventListener('click', function(e) {
+                if (e.target === horarioModal) {
+                    horarioModal.style.display = 'none';
+                    modalVisto = true;
+                }
             });
             
             function typeWriter() {
