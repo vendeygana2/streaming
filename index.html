@@ -35,6 +35,47 @@
             margin: 10px auto;
         }
         
+        /* AVISO NETFLIX */
+        .netflix-warning {
+            background-color: #E50914;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid #B81D24;
+        }
+        
+        .netflix-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .netflix-logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .netflix-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .netflix-content {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .netflix-highlight {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        /* FIN AVISO NETFLIX */
+        
         h1 {
             color: #333;
             margin-bottom: 15px;
@@ -351,6 +392,19 @@
                 max-width: 98%;
                 max-height: 98vh;
             }
+            
+            .netflix-warning {
+                padding: 12px;
+            }
+            
+            .netflix-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .netflix-logo {
+                margin-bottom: 5px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -394,6 +448,14 @@
             .telegram-buttons {
                 flex-direction: column;
             }
+            
+            .netflix-warning {
+                padding: 10px;
+            }
+            
+            .netflix-content {
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 320px) {
@@ -416,6 +478,10 @@
             .typewriter-text {
                 font-size: 0.8rem;
             }
+            
+            .netflix-content {
+                font-size: 0.85rem;
+            }
         }
         
         /* Para pantallas muy altas */
@@ -432,6 +498,17 @@
 </head>
 <body>
     <div class="container">
+        <!-- AVISO NETFLIX -->
+        <div class="netflix-warning">
+            <div class="netflix-header">
+                <div class="netflix-logo">NETFLIX</div>
+                <div class="netflix-title">IMPORTANTE SI TU COMPRA ES NETFLIX</div>
+            </div>
+            <div class="netflix-content">
+                Esta plataforma ha venido presentando fallas que van desde caídas masivas de cuentas post pago y solventar el inconveniente puede llevar entre 1 a 48 horas dependiendo de NETFLIX. También debe tener claro e informar a su cliente que la cuenta puede presentar falla de contraseña incluso al momento de entregar, pues es una cuenta compartida y las personas tienden a bloquearlas. <span class="netflix-highlight">TODO ESTO DEBEN TENERLO CLARO</span>. Pueden ofrecer otras alternativas al cliente, pero si desean comprar deben tener en cuenta lo antes descrito.
+            </div>
+        </div>
+        
         <h1>Cuentas de Entretenimiento Premium</h1>
         <p>Haz clic en el botón para acceder a nuestras suscripciones premium para tus plataformas de entretenimiento favoritas</p>
         
