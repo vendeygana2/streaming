@@ -92,9 +92,11 @@
             word-wrap: break-word;
         }
         
-        .button-container {
+        .buttons-container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
+            gap: 20px;
             margin: 25px 0;
             position: relative;
         }
@@ -109,6 +111,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             max-width: 95%;
             position: relative;
+            flex: 1;
+            min-width: 280px;
         }
         
         .custom-button:hover {
@@ -127,6 +131,24 @@
             height: auto;
             max-width: min(400px, 90vw);
             border-radius: 10px;
+        }
+        
+        .text-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            text-decoration: none;
+            min-height: 120px;
+        }
+        
+        .text-button:hover {
+            background: linear-gradient(135deg, #5a0db5 0%, #1c68e6 100%);
         }
         
         .info-box {
@@ -405,6 +427,21 @@
             .netflix-logo {
                 margin-bottom: 5px;
             }
+            
+            .buttons-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .custom-button {
+                min-width: auto;
+            }
+            
+            .text-button {
+                font-size: 1.1rem;
+                min-height: 100px;
+                padding: 15px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -425,7 +462,7 @@
                 margin-bottom: 20px;
             }
             
-            .button-container {
+            .buttons-container {
                 margin: 20px 0;
             }
             
@@ -456,6 +493,12 @@
             .netflix-content {
                 font-size: 0.9rem;
             }
+            
+            .text-button {
+                font-size: 1rem;
+                min-height: 90px;
+                padding: 12px;
+            }
         }
         
         @media (max-width: 320px) {
@@ -482,6 +525,12 @@
             .netflix-content {
                 font-size: 0.85rem;
             }
+            
+            .text-button {
+                font-size: 0.9rem;
+                min-height: 80px;
+                padding: 10px;
+            }
         }
         
         /* Para pantallas muy altas */
@@ -502,21 +551,27 @@
         <div class="netflix-warning">
             <div class="netflix-header">
                 <div class="netflix-logo">NETFLIX</div>
-                <div class="netflix-title">IMPORTANTE SI TU COMPRA ES NETFLIX</div>
+                <div class="netflix-title">A PARTIR DEL DIA MIERCOLES 12 DE NOVIEMBRE</div>
             </div>
             <div class="netflix-content">
-                Esta plataforma ha venido presentando fallas que van desde caídas masivas de cuentas post pago y solventar el inconveniente puede llevar entre 1 a 48 horas dependiendo de NETFLIX. También debe tener claro e informar a su cliente que la cuenta puede presentar falla de contraseña incluso al momento de entregar, pues es una cuenta compartida y las personas tienden a bloquearlas. <span class="netflix-highlight">TODO ESTO DEBEN TENERLO CLARO</span>. Pueden ofrecer otras alternativas al cliente, pero si desean comprar deben tener en cuenta lo antes descrito.
+                A PARTIR DEL DIA MIERCOLES 12 DE NOVIEMBRE NO VENDEREMOS MAS NETFLIX DE PERFILES DE CUENTAS COMPARTIDAS, debido a el SIN NUMERO DE INCONVENIENTES QUE HAN GENERADO, solo VENDEREMOS NETFLIX VIP y CUENTAS COMPLETAS, daremos soporte de las cuentas vigentes hasta su vencimiento, les recomendamos tomar previsiones y ofrecer otras alternativas. MIL DISCULPAS POR LAS FALLA NO PROVOCADAS POR NOSOTROS
             </div>
         </div>
         
         <h1>Cuentas de Entretenimiento Premium</h1>
         <p>Haz clic en el botón para acceder a nuestras suscripciones premium para tus plataformas de entretenimiento favoritas</p>
         
-        <div class="button-container">
+        <div class="buttons-container">
             <a href="https://cuentasvendeygana.company.site/products/cuentas-entretenimiento" target="_blank" class="custom-button" id="entertainment-button">
                 <img src="https://i.pinimg.com/736x/70/79/03/7079034963e4a85187b6c119875af3d8.jpg" 
                      alt="Cuentas de Entretenimiento Premium" 
                      class="button-image">
+            </a>
+            
+            <a href="https://vendeygana2.github.io/BOT-DISNEY/" target="_blank" class="custom-button" id="disney-button">
+                <div class="text-button">
+                    BOT DE CÓDIGOS DISNEY
+                </div>
             </a>
         </div>
         
@@ -575,6 +630,7 @@
             const text = "Encontrarás suscripciones premium para las mejores plataformas de entretenimiento: Netflix, Amazon Prime, Disney Plus, Max, Crunchyroll, HBO Max, Paramount+ y muchas más. Disfruta de series, películas, anime y contenido exclusivo con todas las funciones premium al mejor precio del mercado.";
             const container = document.getElementById('typewriter-container');
             const entertainmentButton = document.getElementById('entertainment-button');
+            const disneyButton = document.getElementById('disney-button');
             const entertainmentSound = document.getElementById('entertainment-sound');
             const horarioModal = document.getElementById('horario-modal');
             const modalEntendido = document.getElementById('modal-entendido');
@@ -665,7 +721,7 @@
             }
             
             // Función para crear elementos de entretenimiento
-            function createEntertainmentElements() {
+            function createEntertainmentElements(button) {
                 for (let i = 0; i < 12; i++) {
                     setTimeout(() => {
                         const element = document.createElement('div');
@@ -673,7 +729,7 @@
                         element.textContent = entertainmentElements[i % entertainmentElements.length];
                         
                         // Posición aleatoria alrededor del botón
-                        const buttonRect = entertainmentButton.getBoundingClientRect();
+                        const buttonRect = button.getBoundingClientRect();
                         const randomX = Math.random() * buttonRect.width;
                         
                         element.style.left = `${buttonRect.left + randomX}px`;
@@ -710,7 +766,32 @@
                 });
                 
                 // Crear elementos de entretenimiento
-                createEntertainmentElements();
+                createEntertainmentElements(this);
+                
+                // Efecto de pulsación
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+            
+            // Evento para el botón de Disney
+            disneyButton.addEventListener('click', function(e) {
+                // Si estamos fuera de horario y el usuario no ha visto el modal, mostrarlo y prevenir la acción por defecto
+                if (estaFueraDeHorario() && !modalVisto) {
+                    e.preventDefault();
+                    horarioModal.style.display = 'flex';
+                    return;
+                }
+                
+                // Reproducir sonido
+                entertainmentSound.currentTime = 0;
+                entertainmentSound.play().catch(error => {
+                    console.log('La reproducción automática de audio fue prevenida:', error);
+                });
+                
+                // Crear elementos de entretenimiento
+                createEntertainmentElements(this);
                 
                 // Efecto de pulsación
                 this.style.transform = 'scale(0.95)';
@@ -721,7 +802,11 @@
             
             // Efecto de elementos al pasar el mouse
             entertainmentButton.addEventListener('mouseenter', function() {
-                createEntertainmentElements();
+                createEntertainmentElements(this);
+            });
+            
+            disneyButton.addEventListener('mouseenter', function() {
+                createEntertainmentElements(this);
             });
             
             // Ajustar el contenedor en dispositivos móviles
