@@ -225,6 +225,80 @@
             }
         }
         
+        /* Modal de plataformas no listadas */
+        .modal-plataformas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .modal-plataformas-content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 95%;
+            width: 100%;
+            max-height: 95vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-plataformas-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ed7318;
+        }
+        
+        .modal-plataformas-title {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+        }
+        
+        .modal-plataformas-message {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            text-align: left;
+        }
+        
+        .modal-plataformas-highlight {
+            font-weight: bold;
+            color: #ed7318;
+        }
+        
+        .modal-plataformas-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background-color: #ed7318;
+            color: white;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        
+        .modal-plataformas-button:hover {
+            background-color: #d1620e;
+            transform: translateY(-2px);
+        }
+        
         /* Modal de horario de atención */
         .modal-overlay {
             position: fixed;
@@ -411,7 +485,7 @@
                 margin-top: 20px;
             }
             
-            .modal-content {
+            .modal-content, .modal-plataformas-content {
                 padding: 20px;
                 max-width: 98%;
                 max-height: 98vh;
@@ -467,11 +541,11 @@
                 min-height: 50px;
             }
             
-            .modal-content {
+            .modal-content, .modal-plataformas-content {
                 padding: 15px;
             }
             
-            .modal-title {
+            .modal-title, .modal-plataformas-title {
                 font-size: 1.3rem;
             }
             
@@ -539,6 +613,30 @@
     </style>
 </head>
 <body>
+    <!-- Modal de plataformas no listadas -->
+    <div id="plataformas-modal" class="modal-plataformas">
+        <div class="modal-plataformas-content">
+            <div class="modal-plataformas-icon">📺</div>
+            <h2 class="modal-plataformas-title">¿Buscas una plataforma específica?</h2>
+            <p class="modal-plataformas-message">
+                <span class="modal-plataformas-highlight">Si deseas comprar una plataforma que no está en la lista de productos,</span> por favor solicita la compra a través de nuestros agentes que te darán toda la información, precios y demás, o verifica en nuestro bot de Telegram la disponibilidad.
+            </p>
+            
+            <div class="telegram-section">
+                <h4>Consulta disponibilidad en nuestro bot de Telegram</h4>
+                <p>Puedes consultar directamente en nuestro bot de Telegram las plataformas disponibles y realizar compras automáticas 24/7.</p>
+                
+                <div class="telegram-buttons">
+                    <a href="https://t.me/panaxvendeygana_bot" target="_blank" class="telegram-button telegram">
+                        <span>🤖</span> Ir al bot de Telegram
+                    </a>
+                </div>
+            </div>
+            
+            <button id="plataformas-entendido" class="modal-plataformas-button">ENTENDIDO</button>
+        </div>
+    </div>
+
     <div class="container">
         <!-- AVISO NETFLIX ACTUALIZADO -->
         <div class="netflix-warning">
@@ -627,13 +725,37 @@
             const entertainmentSound = document.getElementById('entertainment-sound');
             const horarioModal = document.getElementById('horario-modal');
             const modalEntendido = document.getElementById('modal-entendido');
+            const plataformasModal = document.getElementById('plataformas-modal');
+            const plataformasEntendido = document.getElementById('plataformas-entendido');
             const speed = 50; // Velocidad de escritura en milisegundos
             
             // Símbolos de entretenimiento
             const entertainmentElements = ['🎬', '📺', '🍿', '🎭', '🌟', '🎪', '🎮', '📽️'];
             
-            // Variable para controlar si el usuario ya vio el modal
-            let modalVisto = false;
+            // Variables para controlar si el usuario ya vio los modales
+            let modalHorarioVisto = false;
+            let modalPlataformasVisto = false;
+            
+            // Mostrar modal de plataformas automáticamente al cargar la página
+            setTimeout(() => {
+                if (!modalPlataformasVisto) {
+                    plataformasModal.style.display = 'flex';
+                }
+            }, 500);
+            
+            // Evento para el botón ENTENDIDO del modal de plataformas
+            plataformasEntendido.addEventListener('click', function() {
+                plataformasModal.style.display = 'none';
+                modalPlataformasVisto = true;
+            });
+            
+            // Cerrar modal de plataformas al hacer clic fuera del contenido
+            plataformasModal.addEventListener('click', function(e) {
+                if (e.target === plataformasModal) {
+                    plataformasModal.style.display = 'none';
+                    modalPlataformasVisto = true;
+                }
+            });
             
             // Función para verificar si estamos fuera del horario de atención
             function estaFueraDeHorario() {
@@ -660,21 +782,23 @@
             }
             
             // Mostrar modal si estamos fuera de horario y el usuario no lo ha visto aún
-            if (estaFueraDeHorario() && !modalVisto) {
-                horarioModal.style.display = 'flex';
+            if (estaFueraDeHorario() && !modalHorarioVisto) {
+                setTimeout(() => {
+                    horarioModal.style.display = 'flex';
+                }, 1000);
             }
             
-            // Evento para el botón ENTENDIDO del modal
+            // Evento para el botón ENTENDIDO del modal de horario
             modalEntendido.addEventListener('click', function() {
                 horarioModal.style.display = 'none';
-                modalVisto = true;
+                modalHorarioVisto = true;
             });
             
-            // Cerrar modal al hacer clic fuera del contenido
+            // Cerrar modal de horario al hacer clic fuera del contenido
             horarioModal.addEventListener('click', function(e) {
                 if (e.target === horarioModal) {
                     horarioModal.style.display = 'none';
-                    modalVisto = true;
+                    modalHorarioVisto = true;
                 }
             });
             
@@ -746,7 +870,7 @@
             // Evento para el botón de entretenimiento
             entertainmentButton.addEventListener('click', function(e) {
                 // Si estamos fuera de horario y el usuario no ha visto el modal, mostrarlo y prevenir la acción por defecto
-                if (estaFueraDeHorario() && !modalVisto) {
+                if (estaFueraDeHorario() && !modalHorarioVisto) {
                     e.preventDefault();
                     horarioModal.style.display = 'flex';
                     return;
@@ -771,7 +895,7 @@
             // Evento para el botón de Disney
             disneyButton.addEventListener('click', function(e) {
                 // Si estamos fuera de horario y el usuario no ha visto el modal, mostrarlo y prevenir la acción por defecto
-                if (estaFueraDeHorario() && !modalVisto) {
+                if (estaFueraDeHorario() && !modalHorarioVisto) {
                     e.preventDefault();
                     horarioModal.style.display = 'flex';
                     return;
