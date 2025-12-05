@@ -148,25 +148,6 @@
             border-radius: 10px;
         }
         
-        .text-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            font-weight: bold;
-            font-size: 1.3rem;
-            text-align: center;
-            text-decoration: none;
-            min-height: 120px;
-            border-radius: 10px;
-        }
-        
-        .text-button:hover {
-            background: linear-gradient(135deg, #5a0db5 0%, #1c68e6 100%);
-        }
-        
         .info-box {
             background-color: #f8f9fa;
             border-left: 4px solid #ed7318;
@@ -522,12 +503,6 @@
                 font-size: 1.1rem;
                 padding: 10px;
             }
-            
-            .text-button {
-                font-size: 1.1rem;
-                min-height: 100px;
-                padding: 15px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -584,12 +559,6 @@
                 font-size: 1rem;
                 padding: 8px;
             }
-            
-            .text-button {
-                font-size: 1rem;
-                min-height: 90px;
-                padding: 12px;
-            }
         }
         
         @media (max-width: 320px) {
@@ -620,12 +589,6 @@
             .netflix-extra-highlight {
                 font-size: 0.9rem;
                 padding: 6px;
-            }
-            
-            .text-button {
-                font-size: 0.9rem;
-                min-height: 80px;
-                padding: 10px;
             }
         }
         
@@ -691,12 +654,6 @@
                      alt="Cuentas de Entretenimiento Premium" 
                      class="button-image">
             </a>
-            
-            <a href="https://vendeygana2.github.io/BOT-DISNEY/" target="_blank" class="custom-button" id="disney-button">
-                <div class="text-button">
-                    BOT DE CÓDIGOS DISNEY
-                </div>
-            </a>
         </div>
         
         <div class="info-box">
@@ -754,7 +711,6 @@
             const text = "Encontrarás suscripciones premium para las mejores plataformas de entretenimiento: Netflix, Amazon Prime, Disney Plus, Max, Crunchyroll, HBO Max, Paramount+ y muchas más. Disfruta de series, películas, anime y contenido exclusivo con todas las funciones premium al mejor precio del mercado.";
             const container = document.getElementById('typewriter-container');
             const entertainmentButton = document.getElementById('entertainment-button');
-            const disneyButton = document.getElementById('disney-button');
             const entertainmentSound = document.getElementById('entertainment-sound');
             const horarioModal = document.getElementById('horario-modal');
             const modalEntendido = document.getElementById('modal-entendido');
@@ -925,37 +881,8 @@
                 }, 150);
             });
             
-            // Evento para el botón de Disney
-            disneyButton.addEventListener('click', function(e) {
-                // Si estamos fuera de horario y el usuario no ha visto el modal, mostrarlo y prevenir la acción por defecto
-                if (estaFueraDeHorario() && !modalHorarioVisto) {
-                    e.preventDefault();
-                    horarioModal.style.display = 'flex';
-                    return;
-                }
-                
-                // Reproducir sonido
-                entertainmentSound.currentTime = 0;
-                entertainmentSound.play().catch(error => {
-                    console.log('La reproducción automática de audio fue prevenida:', error);
-                });
-                
-                // Crear elementos de entretenimiento
-                createEntertainmentElements(this);
-                
-                // Efecto de pulsación
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-            
             // Efecto de elementos al pasar el mouse
             entertainmentButton.addEventListener('mouseenter', function() {
-                createEntertainmentElements(this);
-            });
-            
-            disneyButton.addEventListener('mouseenter', function() {
                 createEntertainmentElements(this);
             });
             
